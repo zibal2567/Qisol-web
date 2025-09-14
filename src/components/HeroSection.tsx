@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface HeroSectionProps {
   hero: {
@@ -87,7 +88,13 @@ export default function HeroSection({ hero }: HeroSectionProps) {
           </div>
 
           {/* Medical Product Showcase */}
-          <div className="relative w-full max-w-sm mx-auto">
+          <motion.div
+            className="relative w-full max-w-sm mx-auto"
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1.0 }}
+          >
             {/* กรอบการ์ด */}
             <div className="bg-emerald-900/40 rounded-2xl p-6 pt-40 shadow-lg w-64 h-64">
             </div>
@@ -101,7 +108,7 @@ export default function HeroSection({ hero }: HeroSectionProps) {
                 className="object-contain drop-shadow-xl"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
