@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useState } from 'react';
-import { Settings, Beaker, Lightbulb, Atom, Zap, CheckCircle } from 'lucide-react';
+import { Settings, Beaker, Lightbulb, Zap, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 
 interface TechnologySectionProps {
@@ -61,23 +61,34 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
         {/* Section Header */}
         <div className="max-w-4xl mx-auto text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 shadow-sm mb-6">
-            <Atom className="w-4 h-4 text-purple-600" />
-            <span className="text-sm font-medium text-gray-700">เทคโนโลยีขั้นสูง</span>
+            <Settings className="w-4 h-4 text-[#439b83]" />
+            <span className="text-sm font-medium text-gray-700">Core Technologies</span>
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-purple-600 via-[#439b83] to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-950 via-[#439b83] to-[#439b83] bg-clip-text text-transparent">
               {technology.title}
             </span>
           </h2>
 
-          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-base sm:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto -mt-5">
             สำรวจเทคโนโลยีชั้นนำที่อยู่เบื้องหลังการพัฒนา QI-SOL Hydrogel Film
           </p>
+
+          {/* Core_Technology Image */}
+          <div className="flex justify-center">
+            <Image
+              src="/Image/Core_Technology.png"
+              alt="QI-SOL-Core_Technology"
+              width={1200}
+              height={675}
+              className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl"
+            />
+          </div>
         </div>
 
         {/* Technology Tabs */}
-        <div className="mb-10">
+        <div className="mb-10 -mt-15">
           <div className="flex flex-wrap justify-center gap-4 mb-5">
             {Object.entries(techTabs).map(([key, tab]) => {
               const IconComponent = tab.icon;
@@ -87,8 +98,8 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  className={`flex items-center gap-3 px-4 py-4 rounded-xl font-semibold transition-all duration-300 transform border-2 shadow-lg hover:shadow-xl hover:scale-105 ${isActive
-                    ? "bg-gradient-to-r from-[#439b83] to-purple-600 text-white border-[#439b83] shadow-[#439b83]/30"
+                  className={`flex items-center gap-3 px-4 py-4 rounded-xl font-semibold transition-all duration-300 transform border-2 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer ${isActive
+                    ? "bg-gradient-to-r from-[#439b83] to-[#439b83]/50 text-white border-[#439b83] shadow-[#439b83]/30"
                     : "bg-white text-gray-700 border-gray-200 hover:border-[#439b83]/50 hover:text-[#439b83]"
                     }`}
                 >
@@ -101,7 +112,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
         </div>
 
         {/* Technology Content */}
-        <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200 overflow-hidden -mt-5">
 
           {/* Process Tab */}
           {activeTab === 'process' && (
@@ -127,7 +138,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
                       <div className="w-20 h-20 bg-white rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                         {activeStep === 0 && <Beaker className="w-10 h-10 text-[#439b83]" />}
                         {activeStep === 1 && <Zap className="w-10 h-10 text-[#439b83]" />}
-                        {activeStep === 2 && <Atom className="w-10 h-10 text-[#439b83]" />}
+                        {activeStep === 2 && <Settings className="w-10 h-10 text-[#439b83]" />}
                         {activeStep >= 3 && <CheckCircle className="w-10 h-10 text-[#439b83]" />}
                       </div>
                     </div>
@@ -166,10 +177,6 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
                           <p className="text-gray-600 text-sm leading-relaxed">{step.desc}</p>
                         </div>
                       </div>
-
-                      {activeStep === index && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#439b83] rounded-r-full"></div>
-                      )}
                     </div>
                   ))}
                 </div>
@@ -217,14 +224,14 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {techTabs.innovation.content.map((innovation, index) => (
-                  <div key={index} className="group relative overflow-hidden bg-gradient-to-br from-white to-blue-50 p-8 rounded-2xl shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div key={index} className="group relative overflow-hidden bg-gradient-to-br from-white to-blue-50 p-8 rounded-2xl shadow-lg border border-blue-100 transition-all duration-500">
 
                     {/* Background Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-[#439b83]/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                     <div className="relative z-10">
                       <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-r from-[#439b83] to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-r from-[#439b83] to-[#439b83]/50 rounded-xl flex items-center justify-center text-white shadow-lg transition-transform duration-300">
                           <Lightbulb className="w-7 h-7" />
                         </div>
                         <div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useMemo, useState } from 'react';
-import { Shield, Zap, DollarSign, Heart } from 'lucide-react';
+import { Shield, Zap, DollarSign, Atom } from 'lucide-react';
 import Image from 'next/image';
 
 interface BenefitsSectionProps {
@@ -39,14 +39,6 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
       stat: '40%',
       statLabel: 'ลดค่าใช้จ่าย'
     },
-    {
-      icon: Heart,
-      title: 'สะดวกสบาย',
-      desc: 'ใช้งานง่าย ไม่เจ็บปวด ไม่ต้องเปลี่ยนบ่อย',
-      color: 'purple',
-      stat: '100%',
-      statLabel: 'ความพึงพอใจ'
-    },
   ], []);
 
   return (
@@ -63,6 +55,10 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
 
         {/* Section Header */}
         <div className="max-w-4xl mx-auto text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 shadow-sm mb-6">
+            <Atom className="w-4 h-4 text-[#439b83]" />
+            <span className="text-sm font-medium text-gray-700">Why QiSol?</span>
+          </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             <span className="bg-gradient-to-r from-gray-900 via-[#439b83] to-emerald-600 bg-clip-text text-transparent">
               {benefits.title}
@@ -85,7 +81,7 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-15 -mt-15">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-5 -mt-15">
           {benefitData.map((benefit, index) => {
             const IconComponent = benefit.icon;
             const isHovered = hoveredCard === index;
@@ -93,7 +89,7 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
             return (
               <div
                 key={index}
-                className={`group relative bg-white p-8 rounded-2xl border-2 transition-all duration-500 cursor-pointer ${isHovered ? "border-[#439b83] shadow-2xl -translate-y-4" : "border-gray-200 shadow-lg hover:shadow-xl hover:-translate-y-2"
+                className={`group relative bg-white p-8 rounded-2xl border-2 transition-all duration-500 ${isHovered ? "border-[#439b83] shadow-2xl" : "border-gray-200 shadow-lg hover:shadow-xl"
                   }`}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}

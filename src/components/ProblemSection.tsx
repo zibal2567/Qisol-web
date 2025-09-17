@@ -41,7 +41,7 @@ export default function ProblemSection({ problem }: ProblemSectionProps) {
         <div className="max-w-4xl mx-auto text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 shadow-sm mb-6">
             <AlertTriangle className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-medium text-gray-700">วิเคราะห์ปัญหา</span>
+            <span className="text-sm font-medium text-gray-700">Problem</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             <span className="bg-gradient-to-r from-gray-900 via-red-700 to-orange-600 bg-clip-text text-transparent">

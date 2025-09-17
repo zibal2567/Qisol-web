@@ -4,9 +4,9 @@ export const landingConfig = {
                   logo: "QiSol",
                   links: [
                         { href: "#product", label: "ผลิตภัณฑ์" },
-                        { href: "#problem", label: "ปัญหา" },
                         { href: "#benefits", label: "ประโยชน์" },
                         { href: "#technology", label: "เทคโนโลยี" },
+                        { href: "#problem", label: "ปัญหา" },
                         { href: "#research", label: "วิจัย" },
                         { href: "#contact", label: "ติดต่อ" },
                   ],
@@ -85,9 +85,9 @@ export const landingConfig = {
                   logo: "QiSol",
                   links: [
                         { href: "#product", label: "Product" },
-                        { href: "#problem", label: "Problem" },
-                        { href: "#benefits", label: "Benefits" },
                         { href: "#technology", label: "Technology" },
+                        { href: "#benefits", label: "Benefits" },
+                        { href: "#problem", label: "Problem" },
                         { href: "#research", label: "Research" },
                         { href: "#contact", label: "Contact" },
                   ],
@@ -95,7 +95,7 @@ export const landingConfig = {
             hero: {
                   title: "QiSol",
                   subtitle:
-                        "Dissolvable hydrogel film with Quercus infectoria extract reduces infection and accelerates healing",
+                        "Advanced Dissolving Wound Healing Film Infused with botanical extract from Quercus infectoria",
                   cta: "Contact Research Team",
             },
             product: {

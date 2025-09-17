@@ -72,7 +72,7 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
   return (
     <nav
       className={[
-        "fixed inset-x-0 top-0 z-[900]", // ⬅️ ต่ำกว่า Drawer/Overlay
+        "fixed inset-x-0 top-0 z-[900]",
         "transition-all duration-300",
         scrolled
           ? "bg-white/90 backdrop-blur-md shadow-md border-b border-black/10 h-16"
