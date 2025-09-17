@@ -19,7 +19,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ lang = "en", setLang }: NavbarProps) {
-  const safeSetLang = typeof setLang === "function" ? setLang : () => {}
+  const safeSetLang = typeof setLang === "function" ? setLang : () => { }
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<string>("")
   const [isSheetOpen, setIsSheetOpen] = useState(false)
@@ -64,7 +64,7 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
       const pos = el.offsetTop - offset
       window.scrollTo({ top: pos, behavior: "smooth" })
       el.setAttribute("tabindex", "-1")
-      ;(el as HTMLElement).focus({ preventScroll: true })
+        ; (el as HTMLElement).focus({ preventScroll: true })
     }
     setIsSheetOpen(false) // ปิด Drawer หลังคลิก
   }
@@ -75,19 +75,20 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
         "fixed inset-x-0 top-0 z-[900]",
         "transition-all duration-300",
         scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-md border-b border-black/10 h-16"
-          : "bg-transparent sm:h-24",
+          ? "bg-white/90 backdrop-blur-md shadow-md border-b border-black/10 h-20"
+          : "bg-transparent sm:h-24 h-16",
       ].join(" ")}
     >
       <div className="mx-auto max-w-7xl px-6 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-14 h-14 sm:w-32 sm:h-32">
+          <div className="relative">
             <Image
               src="/Image/LOGO.png"
               alt="QiSol Logo"
-              fill
-              className="object-contain drop-shadow-md"
+              width={726}
+              height={204}
+              className="w-28 sm:w-32 lg:w-32 h-auto drop-shadow-md"
               priority
             />
           </div>
@@ -110,8 +111,8 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
                       ? "text-[#439b83] font-semibold"
                       : "text-white font-semibold"
                     : scrolled
-                    ? "text-gray-700 hover:text-[#439b83]"
-                    : "text-white/90 hover:text-white",
+                      ? "text-gray-700 hover:text-[#439b83]"
+                      : "text-white/90 hover:text-white",
                 ].join(" ")}
               >
                 {item.label}
@@ -172,22 +173,23 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
             <SheetContent
               side="right"
               className="top-0 h-screen w-72 bg-white p-6 shadow-xl z-[1200]"
-              >
+            >
               <SheetHeader>
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
 
-              <div className="relative w-32 h-32 -mt-15">
+              <div className="relative">
                 <Image
                   src="/Image/LOGO.png"
                   alt="QiSol Logo"
-                  fill
-                  className="object-contain drop-shadow-md"
+                  width={726}
+                  height={204}
+                  className="w-32 sm:w-32 lg:w-32 h-auto drop-shadow-md"
                   priority
                 />
               </div>
 
-              <nav className="flex flex-col space-y-2 -mt-10">
+              <nav className="flex flex-col space-y-2">
                 {navItems.map((item) => {
                   const id = item.href.replace("#", "")
                   const isActive = activeSection === id

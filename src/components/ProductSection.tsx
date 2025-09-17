@@ -34,15 +34,20 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
           >
             <div className="relative">
               <div className="w-60 h-60 sm:w-80 sm:h-80 bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] rounded-3xl flex items-center justify-center shadow-2xl">
-                <div className="sm:-top-12 left-1/2 -translate-x-1/2 absolute align-center w-72 h-72 sm:w-[400px] sm:h-[400px]">
+                {/* Product Image */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ repeat: Infinity, duration: 4 }}
+                  className="absolute -top-5 sm:-top-12 left-1/2 -translate-x-1/2 w-72 h-72 sm:w-[420px] sm:h-[420px]"
+                >
                   <Image
                     src="/Image/Product.png"
-                    alt="QiSol-Logo"
+                    alt="QiSol Product"
                     fill
-                    className="object-contain drop-shadow-lg"
+                    className="object-contain drop-shadow-2xl"
                     priority
                   />
-                </div>
+                </motion.div>
               </div>
               <div className="absolute -top-6 -right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                 IP Number: 2503000774
@@ -62,12 +67,13 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
             transition={{ duration: 0.8 }}
           >
             <div className="relative text-center lg:text-left">
-              <div className="absolute sm:-top-15 -top-15 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 w-48 h-48 sm:w-48 sm:h-48">
+              <div className="absolute sm:-top-2 -top-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0">
                 <Image
                   src="/Image/LOGO.png"
                   alt="QiSol-Logo"
-                  fill
-                  className="object-contain drop-shadow-lg"
+                  width={726}
+                  height={204}
+                  className="w-48 sm:w-56 lg:w-64 h-auto drop-shadow-lg"
                   priority
                 />
               </div>
@@ -117,8 +123,8 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
             </div>
           </motion.div>
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 });
 

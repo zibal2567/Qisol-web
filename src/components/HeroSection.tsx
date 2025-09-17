@@ -66,18 +66,19 @@ export default function HeroSection({ hero }: HeroSectionProps) {
           {/* Text Content */}
           <div className="relative text-center lg:text-left">
             {/* Logo ซ้อนทับ */}
-            <div className="absolute -top-25 sm:-top-70 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 w-48 h-48 sm:w-128 sm:h-128 opacity-90">
+            <div className="absolute -top-6 sm:-top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-90">
               <Image
                 src="/Image/LOGO.png"
                 alt="QiSol Logo"
-                fill
-                className="object-contain drop-shadow-lg"
+                width={726}
+                height={204}
+                className="w-48 sm:w-72 lg:w-96 h-auto drop-shadow-lg"
                 priority
               />
             </div>
 
             {/* Title */}
-            <h2 className="pt-15 text-xl sm:text-3xl lg:text-4xl font-bold text-white">
+            <h2 className="pt-10 text-xl sm:text-3xl lg:text-4xl font-bold text-white">
               {hero.title.split(" – ")[1]}
             </h2>
 
