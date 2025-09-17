@@ -34,7 +34,7 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
           >
             <div className="relative">
               <div className="w-60 h-60 sm:w-80 sm:h-80 bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] rounded-3xl flex items-center justify-center shadow-2xl">
-                <div className="absolute align-center w-64 h-64 sm:w-96 sm:h-96">
+                <div className="sm:-top-12 left-1/2 -translate-x-1/2 absolute align-center w-84 h-84 sm:w-[450px] sm:h-[450px]">
                   <Image
                     src="/Image/Product.png"
                     alt="QiSol-Logo"
@@ -45,13 +45,10 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
                 </div>
               </div>
               <div className="absolute -top-6 -right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                หมายเลขคำขอ 2503000774
+                IP Number: 2503000774
               </div>
               <div className="absolute -bottom-6 -left-6 bg-yellow-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                สารสกัดปูดเบญกานี
-              </div>
-              <div className="absolute top-1/2 -right-8 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg transform rotate-12">
-                ใช้ง่าย
+                Quercus infectoria
               </div>
             </div>
           </motion.div>

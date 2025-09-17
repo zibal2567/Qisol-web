@@ -89,18 +89,18 @@ export default function HeroSection({ hero }: HeroSectionProps) {
 
           {/* Medical Product Showcase */}
           <motion.div
-            className="relative w-full max-w-sm mx-auto"
+            className="relative w-full max-w-sm mx-auto mt-20 sm:mt-0"
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 1.0 }}
           >
             {/* กรอบการ์ด */}
-            <div className="bg-emerald-900/40 rounded-2xl p-6 pt-40 shadow-lg w-64 h-64">
+            <div className="bg-emerald-900/40 rounded-2xl p-6 pt-50 sm:-top-32 -top-0 shadow-lg w-128 h-72 sm:-ml-10">
             </div>
 
             {/* รูปสินค้า */}
-            <div className="absolute sm:-top-32 -top-20 left-1/2 -translate-x-1/2 w-128 h-128 ">
+            <div className="absolute sm:-top-32 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-128 sm:h-128">
               <Image
                 src="/Image/Demo.png"
                 alt="QI-SOL Product"

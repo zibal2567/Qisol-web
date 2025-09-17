@@ -54,9 +54,9 @@ export default function Home() {
           product={config.product}
           features={config.features}
         />
-        <ProblemSection problem={config.problem} />
         <BenefitsSection benefits={config.benefits} />
         <TechnologySection technology={config.technology} />
+        <ProblemSection problem={config.problem} />
         <ResearchSection research={config.research} />
         <ContactSection cta={config.cta} />
       </main>

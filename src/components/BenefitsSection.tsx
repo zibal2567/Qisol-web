@@ -1,6 +1,8 @@
 'use client';
 
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
+import { Shield, Zap, DollarSign, Heart } from 'lucide-react';
+import Image from 'next/image';
 
 interface BenefitsSectionProps {
   benefits: {
@@ -10,58 +12,131 @@ interface BenefitsSectionProps {
 }
 
 const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSectionProps) {
-  const benefitIcons = useMemo(() => ['🛡️', '🔬', '👍', '💚'], []);
-  
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const benefitData = useMemo(() => [
+    {
+      icon: Shield,
+      title: 'ป้องกันการติดเชื้อ',
+      desc: 'สร้างสภาพแวดล้อมที่ปลอดภัยสำหรับการรักษา',
+      color: 'emerald',
+      stat: '99.9%',
+      statLabel: 'ป้องกันแบคทีเรีย'
+    },
+    {
+      icon: Zap,
+      title: 'รักษาเร็วขึ้น',
+      desc: 'ลดเวลาในการหายของแผลลงอย่างมาก',
+      color: 'blue',
+      stat: '3x',
+      statLabel: 'เร็วกว่าวิธีเดิม'
+    },
+    {
+      icon: DollarSign,
+      title: 'ประหยัดค่าใช้จ่าย',
+      desc: 'ลดต้นทุนการรักษาและค่าใช้จ่ายด้านสุขภาพ',
+      color: 'amber',
+      stat: '40%',
+      statLabel: 'ลดค่าใช้จ่าย'
+    },
+    {
+      icon: Heart,
+      title: 'สะดวกสบาย',
+      desc: 'ใช้งานง่าย ไม่เจ็บปวด ไม่ต้องเปลี่ยนบ่อย',
+      color: 'purple',
+      stat: '100%',
+      statLabel: 'ความพึงพอใจ'
+    },
+  ], []);
+
   return (
-    <section id="benefits" className="py-20 bg-gradient-to-b from-green-50 to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+    <section id="benefits" className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-gray-50">
+
+      {/* Subtle Background Elements */}
+      <div className="absolute inset-0 opacity-40 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full filter blur-3xl"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            {benefits.title}
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-gray-900 via-[#439b83] to-emerald-600 bg-clip-text text-transparent">
+              {benefits.title}
+            </span>
           </h2>
-          <div className="w-24 h-1 bg-green-500 mx-auto rounded-full"></div>
+          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            ค้นพบประโยชน์ที่โดดเด่นของ QI-SOL ที่จะเปลี่ยนแปลงประสบการณ์การรักษาแผลของคุณ
+          </p>
+
+          {/* Benefits Image */}
+          <div className="flex justify-center my-10">
+            <Image
+              src="/Image/Benefits.png"
+              alt="QI-SOL-Benefits"
+              width={1200}
+              height={675}
+              className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl"
+            />
+          </div>
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {benefits.items.map((benefit, index) => (
-            <div 
-              key={index}
-              className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-green-200"
-            >
-              {/* Icon */}
-              <div className="text-6xl mb-6 text-center group-hover:scale-110 transition-transform duration-300">
-                {benefitIcons[index]}
-              </div>
-              
-              {/* Content */}
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 leading-tight">
-                  {benefit}
-                </h3>
-                
-                {/* Decorative element */}
-                <div className="w-12 h-1 bg-gradient-to-r from-green-400 to-blue-400 mx-auto rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-15 -mt-15">
+          {benefitData.map((benefit, index) => {
+            const IconComponent = benefit.icon;
+            const isHovered = hoveredCard === index;
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-green-500 to-blue-500 p-8 rounded-2xl shadow-xl text-white max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">
-              พร้อมที่จะเปลี่ยนแปลงการรักษาแผลแล้วหรือยัง?
-            </h3>
-            <p className="text-green-100 mb-6 text-lg">
-              QiSol นำเสนอโซลูชันที่ปลอดภัย มีประสิทธิภาพ และเข้าถึงได้สำหรับทุกคน
-            </p>
-            <button className="bg-white text-green-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg">
-              ติดต่อเรา
-            </button>
-          </div>
+            return (
+              <div
+                key={index}
+                className={`group relative bg-white p-8 rounded-2xl border-2 transition-all duration-500 cursor-pointer ${isHovered ? "border-[#439b83] shadow-2xl -translate-y-4" : "border-gray-200 shadow-lg hover:shadow-xl hover:-translate-y-2"
+                  }`}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+
+                {/* Background Gradient */}
+                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-gray-50 to-[#439b83]/5`}></div>
+
+                <div className="relative z-10 text-center">
+                  {/* Icon */}
+                  <div className="mb-6">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl transition-all duration-300 ${isHovered ? "bg-[#439b83] text-white shadow-lg" : "bg-gray-100 text-gray-600 group-hover:bg-[#439b83]/10 group-hover:text-[#439b83]"
+                      }`}>
+                      <IconComponent className="w-8 h-8" />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-bold text-gray-900 leading-tight">
+                      {benefit.title}
+                    </h3>
+
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {benefit.desc}
+                    </p>
+
+                    {/* Statistic */}
+                    <div className={`pt-4 border-t transition-colors duration-300 ${isHovered ? "border-[#439b83]/30" : "border-gray-200"
+                      }`}>
+                      <div className={`text-2xl font-bold transition-colors duration-300 ${isHovered ? "text-[#439b83]" : "text-gray-800"
+                        }`}>
+                        {benefit.stat}
+                      </div>
+                      <div className="text-xs text-gray-500 font-medium">
+                        {benefit.statLabel}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
