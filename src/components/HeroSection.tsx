@@ -96,7 +96,7 @@ export default function HeroSection({ hero }: HeroSectionProps) {
             transition={{ duration: 1.0 }}
           >
             {/* กรอบการ์ด */}
-            <div className="bg-emerald-900/40 rounded-2xl p-6 pt-50 sm:-top-32 -top-0 shadow-lg w-128 h-72 sm:-ml-10">
+            <div className="bg-emerald-900/40 rounded-2xl p-6 pt-50 sm:-top-32 -top-0 shadow-lg w-128 h-72 sm:-ml-15">
             </div>
 
             {/* รูปสินค้า */}
