@@ -49,6 +49,11 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   font-family: var(--font-kanit), 'Kanit', 'Sarabun', 'Noto Sans Thai', sans-serif;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 /* Thai language support */
@@ -94,5 +99,22 @@ body {
   /* Better tap highlighting */
   * {
     -webkit-tap-highlight-color: rgba(59, 130, 246, 0.1);
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  body, html {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* Fix container widths */
+  .container, section, main {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Fix absolute positioned elements */
+  .absolute {
+    max-width: 100vw;
   }
 }

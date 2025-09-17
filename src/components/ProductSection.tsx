@@ -34,7 +34,7 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
           >
             <div className="relative">
               <div className="w-60 h-60 sm:w-80 sm:h-80 bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] rounded-3xl flex items-center justify-center shadow-2xl">
-                <div className="sm:-top-12 left-1/2 -translate-x-1/2 absolute align-center w-84 h-84 sm:w-[450px] sm:h-[450px]">
+                <div className="sm:-top-12 left-1/2 -translate-x-1/2 absolute align-center w-72 h-72 sm:w-[400px] sm:h-[400px]">
                   <Image
                     src="/Image/Product.png"
                     alt="QiSol-Logo"

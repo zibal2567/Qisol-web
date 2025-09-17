@@ -128,7 +128,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
               </div>
 
               {/* Interactive Process Steps */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
 
                 {/* Process Visualization */}
                 <div className="relative">

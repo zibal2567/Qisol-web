@@ -11,6 +11,7 @@ const kanit = Kanit({
 export const metadata: Metadata = {
   title: "QiSol | นวัตกรรมรักษาแผลเรื้อรัง",
   description: "QiSol - แผ่นฟิล์มไฮโดรเจลละลายได้ ผสานสารสกัดปูดเบญกานี ลดการติดเชื้อ ฟื้นฟูแผลเร็วขึ้น",
+  viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
 };
 
 export default function RootLayout({
@@ -19,11 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th">
+    <html lang="th" className="overflow-x-hidden">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </head>
       <body
-        className={`${kanit.variable} font-kanit antialiased`}
+        className={`${kanit.variable} font-kanit antialiased overflow-x-hidden`}
       >
-        {children}
+        <div className="min-h-screen overflow-x-hidden">
+          {children}
+        </div>
       </body>
     </html>
   );

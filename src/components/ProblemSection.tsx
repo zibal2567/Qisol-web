@@ -53,7 +53,7 @@ export default function ProblemSection({ problem }: ProblemSectionProps) {
           </p>
         </div>
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-12 items-start">
           {/* Problems Column */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">

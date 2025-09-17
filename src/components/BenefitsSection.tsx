@@ -64,7 +64,7 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
               {benefits.title}
             </span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-base sm:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto -mt-5">
             ค้นพบประโยชน์ที่โดดเด่นของ QI-SOL ที่จะเปลี่ยนแปลงประสบการณ์การรักษาแผลของคุณ
           </p>
 
