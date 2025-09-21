@@ -25,7 +25,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
       content: technology.items
     },
     materials: {
-      title: 'วัสดุและสารประกอบ',
+      title: 'Work process',
       icon: Beaker,
       content: [
         { title: 'Polyvinyl Alcohol (PVA)', desc: 'วัสดุหลักที่ปลอดภัย ไม่เป็นพิษ และย่อยสลายได้ตามธรรมชาติ' },
@@ -34,16 +34,16 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
         { title: 'Hyaluronic Acid', desc: 'ช่วยในการรักษาความชุ่มชื้นและเร่งการสร้างเนื้อเยื่อใหม่' }
       ]
     },
-    innovation: {
-      title: 'นวัตกรรมเทคโนโลยี',
-      icon: Lightbulb,
-      content: [
-        { title: 'Electrospinning Technology', desc: 'เทคโนโลยีการปั่นไฟฟ้าเพื่อสร้างเส้นใยนาโนที่มีขนาดเล็กมาก' },
-        { title: 'Controlled Release System', desc: 'ระบบการปลดปล่อยยาอย่างควบคุมเพื่อประสิทธิภาพสูงสุด' },
-        { title: 'Biodegradable Matrix', desc: 'โครงสร้างที่ย่อยสลายได้เองโดยไม่ต้องผ่าตัดเอาออก' },
-        { title: 'Smart Material Integration', desc: 'การผสานวัสดุอัจฉริยะที่ตอบสนองต่อสภาพแวดล้อมของแผล' }
-      ]
-    }
+    // innovation: {
+    //   title: 'นวัตกรรมเทคโนโลยี',
+    //   icon: Lightbulb,
+    //   content: [
+    //     { title: 'Electrospinning Technology', desc: 'เทคโนโลยีการปั่นไฟฟ้าเพื่อสร้างเส้นใยนาโนที่มีขนาดเล็กมาก' },
+    //     { title: 'Controlled Release System', desc: 'ระบบการปลดปล่อยยาอย่างควบคุมเพื่อประสิทธิภาพสูงสุด' },
+    //     { title: 'Biodegradable Matrix', desc: 'โครงสร้างที่ย่อยสลายได้เองโดยไม่ต้องผ่าตัดเอาออก' },
+    //     { title: 'Smart Material Integration', desc: 'การผสานวัสดุอัจฉริยะที่ตอบสนองต่อสภาพแวดล้อมของแผล' }
+    //   ]
+    // }
   };
 
   return (
@@ -210,7 +210,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
           )}
 
           {/* Innovation Tab */}
-          {activeTab === 'innovation' && (
+          {/* {activeTab === 'innovation' && (
             <div className="p-8 lg:p-12">
               <div className="text-center mb-12">
                 <div className="w-16 h-16 bg-[#439b83]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
@@ -226,7 +226,6 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
                 {techTabs.innovation.content.map((innovation, index) => (
                   <div key={index} className="group relative overflow-hidden bg-gradient-to-br from-white to-blue-50 p-8 rounded-2xl shadow-lg border border-blue-100 transition-all duration-500">
 
-                    {/* Background Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-[#439b83]/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                     <div className="relative z-10">
@@ -244,7 +243,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
                 ))}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </section>

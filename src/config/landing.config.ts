@@ -85,8 +85,8 @@ export const landingConfig = {
                   logo: "QiSol",
                   links: [
                         { href: "#product", label: "Product" },
-                        { href: "#technology", label: "Technology" },
                         { href: "#benefits", label: "Benefits" },
+                        { href: "#technology", label: "Technology" },
                         { href: "#problem", label: "Problem" },
                         { href: "#research", label: "Research" },
                         { href: "#contact", label: "Contact" },

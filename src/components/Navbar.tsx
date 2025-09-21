@@ -37,23 +37,53 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Scrollspy
+  // Simple and reliable scrollspy with debug
   useEffect(() => {
     const sections = navItems.map((item) => item.href.replace("#", ""))
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id)
-        })
-      },
-      { threshold: 0.2, rootMargin: "-10% 0px -10% 0px" }
-    )
-    sections.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
+    
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 120 // navbar height offset
+      
+      // หา section ที่ scroll position อยู่ใน area ของ section นั้น
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i])
+        if (section) {
+          const rect = section.getBoundingClientRect()
+          const offsetTop = window.scrollY + rect.top
+          const offsetBottom = offsetTop + section.offsetHeight
+          
+          // ถ้า scroll position อยู่ใน section นี้
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            console.log(`Active section: ${sections[i]}`) // Debug
+            setActiveSection(sections[i])
+            return
+          }
+        }
+      }
+      
+      // fallback: ถ้าไม่เจอ section ไหน ให้ใช้ section แรกที่ scroll ผ่านแล้ว
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i])
+        if (section && section.offsetTop <= scrollPosition) {
+          console.log(`Fallback active section: ${sections[i]}`) // Debug
+          setActiveSection(sections[i])
+          return
+        }
+      }
+    }
+    
+    handleScroll() // เรียกครั้งแรก
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [navItems])
+
+  // Debug: แสดง active section ใน console
+  useEffect(() => {
+    console.log(`Current active section: ${activeSection}`)
+  }, [activeSection])
 
   const handleNavClick = (href: string, e?: React.MouseEvent) => {
     if (!href.startsWith("#")) return
@@ -105,20 +135,17 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
                 href={item.href}
                 onClick={(e) => handleNavClick(item.href, e)}
                 className={[
-                  "text-lg whitespace-nowrap transition-colors relative",
+                  "text-lg whitespace-nowrap transition-all duration-300 relative px-3 py-2 rounded-lg",
                   isActive
                     ? scrolled
-                      ? "text-[#439b83] font-semibold"
-                      : "text-white font-semibold"
+                      ? "text-white bg-[#439b83] font-bold shadow-lg" 
+                      : "text-[#439b83] bg-white/90 font-bold shadow-lg backdrop-blur-sm"
                     : scrolled
-                      ? "text-gray-700 hover:text-[#439b83]"
-                      : "text-white/90 hover:text-white",
+                      ? "text-gray-700 hover:text-[#439b83] hover:bg-gray-100"
+                      : "text-white/90 hover:text-white hover:bg-white/10",
                 ].join(" ")}
               >
                 {item.label}
-                {isActive && (
-                  <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-[#439b83] rounded" />
-                )}
               </Link>
             )
           })}
@@ -199,10 +226,10 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
                       href={item.href}
                       onClick={(e) => handleNavClick(item.href, e)}
                       className={[
-                        "px-2 py-1 rounded-md text-lg font-medium transition-colors",
+                        "px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 block",
                         isActive
-                          ? "text-[#439b83] bg-green-50 border-r-4 border-[#439b83] font-semibold"
-                          : "text-gray-700 hover:text-[#439b83] hover:bg-green-50",
+                          ? "text-white bg-[#439b83] font-bold shadow-lg border-l-4 border-[#367268]"
+                          : "text-gray-700 hover:text-[#439b83] hover:bg-green-50 hover:border-l-4 hover:border-[#439b83]/30",
                       ].join(" ")}
                     >
                       {item.label}

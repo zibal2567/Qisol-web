@@ -70,7 +70,7 @@ export default function Home() {
             <TechnologySection technology={config.technology} />
             <ProblemSection problem={config.problem} />
             <ResearchSection research={config.research} />
-            <ContactSection cta={config.cta} />
+            <ContactSection />
 
             {/* ✅ Scroll-to-Top Button */}
             <AnimatePresence>
