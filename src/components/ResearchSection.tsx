@@ -78,10 +78,10 @@ export default function ResearchSection({ research }: ResearchSectionProps) {
                   {overview.stats.map((stat, i) => (
                     <div
                       key={i}
-                      className="text-center p-5 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-md hover:shadow-lg border border-gray-100 transition-all duration-300"
+                      className="text-center sm:p-5 p-2 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-md hover:shadow-lg border border-gray-100 transition-all duration-300"
                     >
                       <div
-                        className={`text-2xl sm:text-3xl font-extrabold mb-1 ${
+                        className={`text-[14px] sm:text-3xl font-extrabold mb-1 ${
                           stat.color === 'emerald'
                             ? 'text-emerald-600'
                             : stat.color === 'blue'
@@ -113,7 +113,7 @@ export default function ResearchSection({ research }: ResearchSectionProps) {
               </div>
 
               {/* Visual */}
-              <div className="flex justify-center lg:justify-end">
+              <div className="sm:-mt-0 -mt-5 flex justify-center lg:justify-center">
                 <div className="relative group">
                   <Image
                     src="/Image/Research.png"

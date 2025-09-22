@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { landingConfig } from "@/config/landing.config";
 import { ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { ssr: false });
 const ProductSection = dynamic(() => import("@/components/ProductSection"), { ssr: false });
@@ -57,9 +58,7 @@ export default function Home() {
   return (
     <>
       {!mounted ? (
-        <div className="min-h-screen bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] flex items-center justify-center">
-          <div className="text-white text-xl">Loading...</div>
-        </div>
+        <LoadingScreen />
       ) : (
         <>
           <Navbar lang={lang} setLang={handleLanguageChange} />
