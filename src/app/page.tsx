@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { ssr: false });
 const ProductSection = dynamic(() => import("@/components/ProductSection"), { ssr: false });
-const ProblemSection = dynamic(() => import("@/components/ProblemSection"), { ssr: false });
+// const ProblemSection = dynamic(() => import("@/components/ProblemSection"), { ssr: false });
 const BenefitsSection = dynamic(() => import("@/components/BenefitsSection"), { ssr: false });
 const TechnologySection = dynamic(() => import("@/components/TechnologySection"), { ssr: false });
 const ResearchSection = dynamic(() => import("@/components/ResearchSection"), { ssr: false });
@@ -68,7 +68,7 @@ export default function Home() {
             <ProductSection product={config.product} features={config.features} />
             <BenefitsSection benefits={config.benefits} />
             <TechnologySection technology={config.technology} />
-            <ProblemSection problem={config.problem} />
+            {/* <ProblemSection problem={config.problem} /> */}
             <ResearchSection research={config.research} />
             <ContactSection />
 
