@@ -52,12 +52,14 @@ export default function Footer() {
                         <div className="container mx-auto px-4 py-4">
                               <div className="text-gray-200 text-center text-sm sm:text-base space-x-2">
                                     <span>© 2025 Qisol. All rights reserved.</span>
-                                    <span>Made by
+                                    <br />
+                                    <span>
+                                          Made by{" "}
                                           <a
                                                 href="https://dl-lutfee.vercel.app/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-white transition-colors font-medium"
+                                                className="text-white hover:text-gray-200 transition-colors font-medium"
                                           >
                                                 Lutfee
                                           </a>
