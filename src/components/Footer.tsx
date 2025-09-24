@@ -21,7 +21,7 @@ export default function Footer() {
                                     </div>
                                     <div className="space-y-2 text-center md:text-left">
                                           <p className="text-gray-200 -mt-2">
-                                                ชื่อบริษัท
+                                                Qisol
                                           </p>
                                           <div className="flex items-center justify-center md:justify-start gap-2 sm:text-2xl text-lg font-semibold">
                                                 <Phone className="w-5 h-5 text-white" />
@@ -34,7 +34,7 @@ export default function Footer() {
                               {/* Right: Contact Info */}
                               <div className="space-y-6 text-center md:text-left">
                                     <h4 className="font-semibold text-lg text-white flex items-center justify-center md:justify-start gap-3">
-                                          ติดต่อ/สั่งซื้อสินค้า
+                                          Contact/Order Products
                                           <span className="hidden md:inline-block w-20 border-t border-white/40" />
                                     </h4>
                                     <ul className="space-y-3 text-gray-200">
@@ -51,7 +51,7 @@ export default function Footer() {
                   <div className="border-t border-white/20">
                         <div className="container mx-auto px-4 py-4">
                               <div className="text-gray-200 text-center text-sm sm:text-base">
-                                    © 2025 Qisol. สงวนลิขสิทธิ์.
+                                    © 2025 Qisol. All rights reserved.
                               </div>
                         </div>
                   </div>
