@@ -1,45 +1,26 @@
 'use client';
 
-import { memo, useMemo, useState } from 'react';
+import { memo, useState } from 'react';
 import { Shield, Zap, DollarSign, Atom } from 'lucide-react';
 import Image from 'next/image';
 
 interface BenefitsSectionProps {
   benefits: {
     title: string;
-    items: string[];
+    desc: string;
+    metrics: {
+      value: string;
+      label: string;
+      detail: string;
+    }[];
   };
 }
 
 const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSectionProps) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const benefitData = useMemo(() => [
-    {
-      icon: Shield,
-      title: 'ป้องกันการติดเชื้อ',
-      desc: 'สร้างสภาพแวดล้อมที่ปลอดภัยสำหรับการรักษา',
-      color: 'emerald',
-      stat: '99.9%',
-      statLabel: 'ป้องกันแบคทีเรีย'
-    },
-    {
-      icon: Zap,
-      title: 'รักษาเร็วขึ้น',
-      desc: 'ลดเวลาในการหายของแผลลงอย่างมาก',
-      color: 'blue',
-      stat: '3x',
-      statLabel: 'เร็วกว่าวิธีเดิม'
-    },
-    {
-      icon: DollarSign,
-      title: 'ประหยัดค่าใช้จ่าย',
-      desc: 'ลดต้นทุนการรักษาและค่าใช้จ่ายด้านสุขภาพ',
-      color: 'amber',
-      stat: '40%',
-      statLabel: 'ลดค่าใช้จ่าย'
-    },
-  ], []);
+  // จับคู่ icon ให้ตามลำดับ metric
+  const icons = [Shield, Zap, DollarSign];
 
   return (
     <section id="benefits" className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-gray-50">
@@ -65,7 +46,7 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
             </span>
           </h2>
           <p className="text-base sm:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto -mt-5">
-            ค้นพบประโยชน์ที่โดดเด่นของ QI-SOL ที่จะเปลี่ยนแปลงประสบการณ์การรักษาแผลของคุณ
+            {benefits.desc}
           </p>
 
           {/* Benefits Image */}
@@ -82,27 +63,34 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-5 -mt-15">
-          {benefitData.map((benefit, index) => {
-            const IconComponent = benefit.icon;
+          {benefits.metrics.map((metric, index) => {
+            const IconComponent = icons[index % icons.length];
             const isHovered = hoveredCard === index;
 
             return (
               <div
                 key={index}
-                className={`group relative bg-white p-8 rounded-2xl border-2 transition-all duration-500 ${isHovered ? "border-[#439b83] shadow-2xl" : "border-gray-200 shadow-lg hover:shadow-xl"
+                className={`group relative bg-white p-8 rounded-2xl border-2 transition-all duration-500 ${isHovered
+                  ? "border-[#439b83] shadow-2xl"
+                  : "border-gray-200 shadow-lg hover:shadow-xl"
                   }`}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-
                 {/* Background Gradient */}
-                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-gray-50 to-[#439b83]/5`}></div>
+                <div
+                  className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-gray-50 to-[#439b83]/5`}
+                ></div>
 
                 <div className="relative z-10 text-center">
                   {/* Icon */}
                   <div className="mb-6">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl transition-all duration-300 ${isHovered ? "bg-[#439b83] text-white shadow-lg" : "bg-gray-100 text-gray-600 group-hover:bg-[#439b83]/10 group-hover:text-[#439b83]"
-                      }`}>
+                    <div
+                      className={`inline-flex items-center justify-center w-16 h-16 rounded-xl transition-all duration-300 ${isHovered
+                        ? "bg-[#439b83] text-white shadow-lg"
+                        : "bg-gray-100 text-gray-600 group-hover:bg-[#439b83]/10 group-hover:text-[#439b83]"
+                        }`}
+                    >
                       <IconComponent className="w-8 h-8" />
                     </div>
                   </div>
@@ -110,22 +98,26 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
                   {/* Content */}
                   <div className="space-y-4">
                     <h3 className="text-lg font-bold text-gray-900 leading-tight">
-                      {benefit.title}
+                      {metric.label}
                     </h3>
 
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      {benefit.desc}
+                      {metric.detail}
                     </p>
 
                     {/* Statistic */}
-                    <div className={`pt-4 border-t transition-colors duration-300 ${isHovered ? "border-[#439b83]/30" : "border-gray-200"
-                      }`}>
-                      <div className={`text-2xl font-bold transition-colors duration-300 ${isHovered ? "text-[#439b83]" : "text-gray-800"
-                        }`}>
-                        {benefit.stat}
+                    <div
+                      className={`pt-4 border-t transition-colors duration-300 ${isHovered ? "border-[#439b83]/30" : "border-gray-200"
+                        }`}
+                    >
+                      <div
+                        className={`text-2xl font-bold transition-colors duration-300 ${isHovered ? "text-[#439b83]" : "text-gray-800"
+                          }`}
+                      >
+                        {metric.value}
                       </div>
                       <div className="text-xs text-gray-500 font-medium">
-                        {benefit.statLabel}
+                        {metric.label}
                       </div>
                     </div>
                   </div>

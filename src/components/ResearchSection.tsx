@@ -6,33 +6,30 @@ import { Search } from 'lucide-react';
 interface ResearchSectionProps {
   research: {
     title: string;
+    description: string;
     details: string[];
+    overview: {
+      title: string;
+      description: string;
+      stats: {
+        label: string;
+        value: string;
+        color: string;
+      }[];
+    };
+    methodology: {
+      title: string;
+      description: string;
+      methods: {
+        step: string;
+        title: string;
+        desc: string;
+      }[];
+    };
   };
 }
 
 export default function ResearchSection({ research }: ResearchSectionProps) {
-  const overview = {
-    title: 'การพัฒนาฟิล์มไฮโดรเจลสำหรับการรักษาแผล',
-    description:
-      'นวัตกรรมการแพทย์ที่ใช้เทคโนโลยี Electrospinning ในการสร้างฟิล์มบาง ที่สามารถช่วยในการรักษาแผลได้อย่างมีประสิทธิภาพ',
-    stats: [
-      { label: 'ประสิทธิภาพ', value: '95%', color: 'emerald' },
-      { label: 'ความปลอดภัย', value: '100%', color: 'blue' },
-      { label: 'ความพึงพอใจ', value: '98%', color: 'purple' },
-    ],
-  };
-
-  const methodology = {
-    title: 'กระบวนการผลิตและทดสอบ',
-    description:
-      'ใช้เทคนิค Electrospinning ร่วมกับ Polyvinyl alcohol เพื่อสร้างฟิล์มที่มีคุณสมบัติพิเศษ',
-    methods: [
-      { step: '01', title: 'การเตรียมสารละลาย', desc: 'ผสม PVA กับสารช่วยเพื่อความเหมาะสม' },
-      { step: '02', title: 'Electrospinning Process', desc: 'สร้างเส้นใยนาโนผ่านกระบวนการไฟฟ้า' },
-      { step: '03', title: 'การทดสอบคุณสมบัติ', desc: 'ทดสอบความแข็งแรงและการย่อยสลาย' },
-      { step: '04', title: 'การประเมินผล', desc: 'ทดสอบการใช้งานจริงกับแผลต่างๆ' },
-    ],
-  };
 
   return (
     <section
@@ -53,7 +50,7 @@ export default function ResearchSection({ research }: ResearchSectionProps) {
             </span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            การวิจัยและพัฒนาที่ใช้เทคโนโลยีขั้นสูง เพื่อสร้างนวัตกรรมทางการแพทย์ที่ปลอดภัยและมีประสิทธิภาพ
+            {research.description}
           </p>
         </div>
 
@@ -66,16 +63,16 @@ export default function ResearchSection({ research }: ResearchSectionProps) {
               <div className="space-y-5">
                 <div>
                   <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-                    {overview.title}
+                    {research.overview.title}
                   </h3>
                   <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                    {overview.description}
+                    {research.overview.description}
                   </p>
                 </div>
 
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4">
-                  {overview.stats.map((stat, i) => (
+                  {research.overview.stats.map((stat: { label: string; value: string; color: string }, i: number) => (
                     <div
                       key={i}
                       className="text-center sm:p-5 p-2 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-md hover:shadow-lg border border-gray-100 transition-all duration-300"
@@ -131,14 +128,14 @@ export default function ResearchSection({ research }: ResearchSectionProps) {
           {/* Methodology */}
           <div className="transition-all duration-500 p-8 lg:p-12">
             <div className="text-center mb-5">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">{methodology.title}</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">{research.methodology.title}</h3>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                {methodology.description}
+                {research.methodology.description}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {methodology.methods.map((method, i) => (
+              {research.methodology.methods.map((method: { step: string; title: string; desc: string }, i: number) => (
                 <div key={i} className="relative">
                   <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
                     <div className="flex items-start gap-5">

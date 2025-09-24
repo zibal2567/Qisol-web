@@ -14,17 +14,17 @@ import {
 import { Menu } from "lucide-react"
 
 interface NavbarProps {
-  lang?: "th" | "en"
-  setLang?: (lang: "th" | "en") => void
+  lang?: "th-TH" | "en-US" | "ja-JP"
+  setLang?: (lang: "th-TH" | "en-US" | "ja-JP") => void
 }
 
-export default function Navbar({ lang = "en", setLang }: NavbarProps) {
-  const safeSetLang = typeof setLang === "function" ? setLang : () => { }
+export default function Navbar({ lang = "en-US", setLang }: NavbarProps) {
+  const safeSetLang = typeof setLang === "function" ? setLang : () => {}
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<string>("")
   const [isSheetOpen, setIsSheetOpen] = useState(false)
 
-  const safeLang = landingConfig[lang] ? lang : "en"
+  const safeLang = landingConfig[lang] ? lang : "en-US"
   const config = landingConfig[safeLang]
 
   const navItems = useMemo(() => config?.navbar?.links || [], [config?.navbar?.links])
@@ -40,47 +40,39 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
   // Simple and reliable scrollspy with debug
   useEffect(() => {
     const sections = navItems.map((item) => item.href.replace("#", ""))
-    
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120 // navbar height offset
-      
-      // หา section ที่ scroll position อยู่ใน area ของ section นั้น
+      const scrollPosition = window.scrollY + 120
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i])
         if (section) {
           const rect = section.getBoundingClientRect()
           const offsetTop = window.scrollY + rect.top
           const offsetBottom = offsetTop + section.offsetHeight
-          
-          // ถ้า scroll position อยู่ใน section นี้
           if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            console.log(`Active section: ${sections[i]}`) // Debug
+            console.log(`Active section: ${sections[i]}`)
             setActiveSection(sections[i])
             return
           }
         }
       }
-      
-      // fallback: ถ้าไม่เจอ section ไหน ให้ใช้ section แรกที่ scroll ผ่านแล้ว
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i])
         if (section && section.offsetTop <= scrollPosition) {
-          console.log(`Fallback active section: ${sections[i]}`) // Debug
+          console.log(`Fallback active section: ${sections[i]}`)
           setActiveSection(sections[i])
           return
         }
       }
     }
-    
-    handleScroll() // เรียกครั้งแรก
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    
+
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener("scroll", handleScroll)
     }
   }, [navItems])
 
-  // Debug: แสดง active section ใน console
   useEffect(() => {
     console.log(`Current active section: ${activeSection}`)
   }, [activeSection])
@@ -94,9 +86,9 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
       const pos = el.offsetTop - offset
       window.scrollTo({ top: pos, behavior: "smooth" })
       el.setAttribute("tabindex", "-1")
-        ; (el as HTMLElement).focus({ preventScroll: true })
+      ;(el as HTMLElement).focus({ preventScroll: true })
     }
-    setIsSheetOpen(false) // ปิด Drawer หลังคลิก
+    setIsSheetOpen(false)
   }
 
   return (
@@ -153,32 +145,32 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
           {/* Lang */}
           <select
             value={lang}
-            onChange={(e) => safeSetLang(e.target.value as "th" | "en")}
+            onChange={(e) => safeSetLang(e.target.value as "th-TH" | "en-US" | "ja-JP")}
             className={[
               "px-4 py-2 rounded-lg border text-sm font-semibold transition-all cursor-pointer shadow-sm",
               "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#439b83]",
               "border-[#439b83] text-[#439b83] bg-white",
             ].join(" ")}
           >
-            <option value="th">TH</option>
-            <option value="en">EN</option>
+            <option value="th-TH">TH</option>
+            <option value="en-US">EN</option>
+            <option value="ja-JP">JA</option>
           </select>
-        </div>
-
-        {/* Mobile */}
+        </div>        {/* Mobile */}
         <div className="flex md:hidden items-center gap-2">
           {/* Lang */}
           <select
             value={lang}
-            onChange={(e) => safeSetLang(e.target.value as "th" | "en")}
+            onChange={(e) => safeSetLang(e.target.value as "th-TH" | "en-US" | "ja-JP")}
             className={[
               "px-4 py-2 rounded-lg border text-sm font-semibold transition-all cursor-pointer shadow-sm",
               "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#439b83]",
               "border-[#439b83] text-[#439b83] bg-white",
             ].join(" ")}
           >
-            <option value="th">TH</option>
-            <option value="en">EN</option>
+            <option value="th-TH">TH</option>
+            <option value="en-US">EN</option>
+            <option value="ja-JP">JA</option>
           </select>
 
           {/* Hamburger */}
@@ -196,7 +188,6 @@ export default function Navbar({ lang = "en", setLang }: NavbarProps) {
               </button>
             </SheetTrigger>
 
-            {/* Drawer: on top of everything */}
             <SheetContent
               side="right"
               className="top-0 h-screen w-72 bg-white p-6 shadow-xl z-[1200]"
