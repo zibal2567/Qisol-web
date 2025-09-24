@@ -50,11 +50,22 @@ export default function Footer() {
                   {/* Bottom Bar */}
                   <div className="border-t border-white/20">
                         <div className="container mx-auto px-4 py-4">
-                              <div className="text-gray-200 text-center text-sm sm:text-base">
-                                    © 2025 Qisol. All rights reserved.
+                              <div className="text-gray-200 text-center text-sm sm:text-base space-x-2">
+                                    <span>© 2025 Qisol. All rights reserved.</span>
+                                    <span>Made by
+                                          <a
+                                                href="https://dl-lutfee.vercel.app/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-white transition-colors font-medium"
+                                          >
+                                                Lutfee
+                                          </a>
+                                    </span>
                               </div>
                         </div>
                   </div>
+
             </footer>
       )
 }
