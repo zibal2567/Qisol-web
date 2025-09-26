@@ -101,7 +101,7 @@ export const landingConfig = {
                   title: "ข้อมูลวิจัยและสิทธิบัตร",
                   description: "การวิจัยและพัฒนาที่ใช้เทคโนโลยีขั้นสูง เพื่อสร้างนวัตกรรมทางการแพทย์ที่ปลอดภัยและมีประสิทธิภาพ",
                   details: [
-                        "ระดับ TRL 3",
+                        "ระดับ TRL 4",
                         "ยื่นอนุสิทธิบัตร เลขที่ 2503000774",
                         "วิธี Electrospinning + Polyvinyl alcohol",
                   ],
@@ -231,7 +231,7 @@ export const landingConfig = {
                   title: "Research & Patent Information",
                   description: "Advanced research and development using cutting-edge technology to create safe and effective medical innovations",
                   details: [
-                        "TRL Level 3",
+                        "TRL Level 4",
                         "Patent application no. 2503000774",
                         "Electrospinning with Polyvinyl alcohol",
                   ],
@@ -361,7 +361,7 @@ export const landingConfig = {
                   title: "研究と特許情報",
                   description: "安全で効果的な医療イノベーションを創出するための先端技術を使用した研究開発",
                   details: [
-                        "TRL レベル 3",
+                        "TRL レベル 4",
                         "特許出願番号: 2503000774",
                         "エレクトロスピニング + ポリビニルアルコール",
                   ],
