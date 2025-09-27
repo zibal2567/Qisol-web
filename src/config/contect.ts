@@ -1,7 +1,6 @@
 export const contectConfig = {
-  tel: '000 000 000',
-  email: 'info@xxx.com',
-  facebook: 'Qisol',
-  line: '@qisol',
-  tiktok: 'Qisol'
+  tel: '+66 061-1830764 (Thailand)',
+  email: 'mr.niaffan.muha@gmail.com',
+  facebook: 'Niaffan Muha',
+  line: 'niaffan555',
 };

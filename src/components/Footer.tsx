@@ -2,6 +2,13 @@ import { Phone } from "lucide-react"
 import Image from "next/image"
 import { contectConfig } from "@/config/contect"
 
+const linkMap: Record<string, (val: string) => string> = {
+      tel: (val) => `tel:${val}`,
+      email: (val) => `mailto:${val}`,
+      facebook: () => `https://facebook.com/affan.muha`,
+      line: (val) => `https://line.me/ti/p/${val}`,
+};
+
 export default function Footer() {
       return (
             <footer className="bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] text-white text-sm">
@@ -20,12 +27,16 @@ export default function Footer() {
                                           />
                                     </div>
                                     <div className="space-y-2 text-center md:text-left">
-                                          <p className="text-gray-200 -mt-2">
+                                          {/* <p className="text-gray-200 -mt-2">
                                                 Qisol
-                                          </p>
+                                          </p> */}
                                           <div className="flex items-center justify-center md:justify-start gap-2 sm:text-2xl text-lg font-semibold">
                                                 <Phone className="w-5 h-5 text-white" />
-                                                <span>${contectConfig.tel}</span>
+                                                <a
+                                                      href={`tel:${contectConfig.tel}`}
+                                                >
+                                                      {contectConfig.tel}
+                                                </a>
                                           </div>
                                     </div>
 
@@ -38,10 +49,18 @@ export default function Footer() {
                                           <span className="hidden md:inline-block w-20 border-t border-white/40" />
                                     </h4>
                                     <ul className="space-y-3 text-gray-200">
-                                          <li>Email : ${contectConfig.email}</li>
-                                          <li>Facebook : ${contectConfig.facebook}</li>
-                                          <li>Line : ${contectConfig.line}</li>
-                                          <li>TikTok : ${contectConfig.tiktok}</li>
+                                          {Object.entries(contectConfig).map(([key, value]) => (
+                                                <li key={key}>
+                                                      {key.charAt(0).toUpperCase() + key.slice(1)} :{" "}
+                                                      <a
+                                                            href={linkMap[key] ? linkMap[key](value) : value}
+                                                            target={key === "tel" || key === "email" ? "_self" : "_blank"}
+                                                            rel="noopener noreferrer"
+                                                      >
+                                                            {value}
+                                                      </a>
+                                                </li>
+                                          ))}
                                     </ul>
                               </div>
                         </div>
