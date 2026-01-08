@@ -21,6 +21,13 @@ interface HomeProps {
   params: Promise<{ locale: string }>;
 }
 
+// Locale mapping from URL to config
+const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
+  'th': 'th-TH',
+  'en': 'en-US',
+  'ja': 'ja-JP'
+}
+
 export default function Home({ params }: HomeProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -30,8 +37,8 @@ export default function Home({ params }: HomeProps) {
   // Unwrap params using React.use()
   const resolvedParams = use(params);
   
-  // Use locale directly from URL (now in full format)
-  const currentLocale = resolvedParams.locale as "th-TH" | "en-US" | "ja-JP" || 'th-TH';
+  // Convert short URL locale to full config locale
+  const currentLocale = localeMap[resolvedParams.locale] || 'th-TH';
 
   useEffect(() => {
     setMounted(true);
@@ -39,9 +46,17 @@ export default function Home({ params }: HomeProps) {
 
   // Language change handler with URL navigation
   const handleLanguageChange = useCallback((newLang: "th-TH" | "en-US" | "ja-JP") => {
-    // Navigate to the new locale URL (using full locale format)
+    // Convert full locale to short URL format
+    const reverseMap: Record<"th-TH" | "en-US" | "ja-JP", string> = {
+      'th-TH': 'th',
+      'en-US': 'en',
+      'ja-JP': 'ja'
+    }
+    const shortLocale = reverseMap[newLang]
+    
+    // Navigate to the new locale URL
     const currentPath = pathname.split('/').slice(2).join('/'); // Remove /[locale] part
-    router.push(`/${newLang}/${currentPath}`);
+    router.push(`/${shortLocale}/${currentPath}`);
     
     // Save to localStorage and cookie
     if (typeof window !== "undefined") {
@@ -68,8 +83,53 @@ export default function Home({ params }: HomeProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "QiSol Health",
+    "description": currentLocale === 'th-TH' 
+      ? "นวัตกรรมแผ่นฟิล์มไฮโดรเจลรักษาแผลจากสารสกัดปูดเบญกานี" 
+      : currentLocale === 'en-US'
+      ? "Innovative Hydrogel Wound Healing Film with Quercus Infectoria Extract"
+      : "ハイドロゲル創傷治癒フィルムの革新的な医療技術",
+    "url": "https://qisolhealth.com",
+    "logo": "https://qisolhealth.com/Image/LOGO.png",
+    "image": "https://qisolhealth.com/Image/LOGO.png",
+    "medicalSpecialty": "Wound Care",
+    "priceRange": "$$",
+    "inLanguage": [currentLocale === 'th-TH' ? 'th' : currentLocale === 'en-US' ? 'en' : 'ja'],
+    "availableLanguage": ["th", "en", "ja"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Medical Products",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "MedicalDevice",
+            "name": "QiSol Hydrogel Wound Film",
+            "description": currentLocale === 'th-TH'
+              ? "แผ่นฟิล์มไฮโดรเจลรักษาแผลสูตรพิเศษ"
+              : currentLocale === 'en-US'
+              ? "Advanced Hydrogel Wound Healing Film"
+              : "高度なハイドロゲル創傷治癒フィルム",
+            "category": "Wound Care",
+            "medicalSpecialty": "Dermatology"
+          }
+        }
+      ]
+    },
+  };
+
   return (
     <>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       {!mounted ? (
         <LoadingScreen />
       ) : (

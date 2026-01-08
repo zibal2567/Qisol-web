@@ -1,0 +1,27 @@
+{
+  "name": "QiSol Health - นวัตกรรมฟิล์มรักษาแผลไฮโดรเจล",
+  "short_name": "QiSol Health",
+  "description": "นวัตกรรมแผ่นฟิล์มไฮโดรเจลรักษาแผลจากสารสกัดปูดเบญกานี รักษาแผลเบาหวาน แผลกดทับ และแผลเรื้อรัง",
+  "start_url": "/th",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#439b83",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Image/LOGO.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Image/LOGO.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "medical", "healthcare"],
+  "lang": "th",
+  "dir": "ltr"
+}

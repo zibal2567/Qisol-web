@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const locales = ['th-TH', 'en-US', 'ja-JP']
-const defaultLocale = 'th-TH'
+const locales = ['th', 'en', 'ja']
+const defaultLocale = 'th'
 
-
+// Mapping between short URL and full locale format
+const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
+  'th': 'th-TH',
+  'en': 'en-US',
+  'ja': 'ja-JP'
+}
 
 // Get the preferred locale
 function getLocale(request: NextRequest): string {
@@ -15,10 +20,12 @@ function getLocale(request: NextRequest): string {
   
   if (pathnameHasLocale) return pathname.split('/')[1]
   
-  // Try to get from cookie (which can store localStorage value)
+  // Try to get from cookie (stores full locale, need to convert to short)
   const localeCookie = request.cookies.get('qisol-language')?.value
-  if (localeCookie && locales.includes(localeCookie)) {
-    return localeCookie
+  if (localeCookie) {
+    // Find short locale from full locale
+    const shortLocale = Object.keys(localeMap).find(key => localeMap[key] === localeCookie)
+    if (shortLocale) return shortLocale
   }
   
   // Check Accept-Language header
@@ -28,17 +35,13 @@ function getLocale(request: NextRequest): string {
       .split(',')
       .map(lang => lang.split(';')[0].trim())
       .find(lang => {
-        // Map browser language to our locales
-        if (lang.startsWith('th')) return 'th-TH'
-        if (lang.startsWith('en')) return 'en-US'
-        if (lang.startsWith('ja')) return 'ja-JP'
-        return null
+        const langCode = lang.split('-')[0]
+        return locales.includes(langCode)
       })
     
     if (preferredLocale) {
-      if (preferredLocale.startsWith('th')) return 'th-TH'
-      if (preferredLocale.startsWith('en')) return 'en-US'  
-      if (preferredLocale.startsWith('ja')) return 'ja-JP'
+      const langCode = preferredLocale.split('-')[0]
+      if (locales.includes(langCode)) return langCode
     }
   }
   

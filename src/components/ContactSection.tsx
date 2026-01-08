@@ -50,7 +50,7 @@ const ContactSection = memo(function ContactSection() {
             {/* Right: Skills + Contact */}
             <div className="flex flex-col justify-between space-y-5 h-full">
               {/* Skills */}
-              <div className="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-slate-200">
+              {/* <div className="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-slate-200">
                 <h3 className="text-2xl font-bold text-slate-800 mb-6">
                   Personal Skills
                 </h3>
