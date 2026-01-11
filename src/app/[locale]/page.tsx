@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 import { landingConfig } from "@/config/landing.config";
 import { ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -83,8 +84,36 @@ export default function Home({ params }: HomeProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Structured Data for SEO
-  const structuredData = {
+  // Structured Data for SEO (Organization + MedicalBusiness)
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "QiSol Health",
+    "alternateName": currentLocale === 'th-TH' 
+      ? "QiSol - แผ่นฟิล์มไฮโดรเจลรักษาแผล" 
+      : currentLocale === 'en-US'
+      ? "QiSol - Hydrogel Wound Healing Film"
+      : "QiSol - ハイドロゲル創傷治癒フィルム",
+    "url": "https://qisolhealth.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://qisolhealth.com/Image/LOGO.png",
+      "width": 512,
+      "height": 512
+    },
+    "description": currentLocale === 'th-TH' 
+      ? "นวัตกรรมแผ่นฟิล์มไฮโดรเจลรักษาแผลจากสารสกัดปูดเบญกานี ลดการติดเชื้อ ฟื้นฟูแผลเร็วขึ้น" 
+      : currentLocale === 'en-US'
+      ? "Innovative Hydrogel Wound Healing Film with Quercus Infectoria Extract - Reduces infection, accelerates healing"
+      : "ハイドロゲル創傷治癒フィルムの革新的な医療技術 - 感染を減少させ、治癒を促進",
+    "sameAs": [
+      "https://www.facebook.com/qisolhealth",
+      "https://www.linkedin.com/company/qisolhealth",
+      "https://twitter.com/qisolhealth"
+    ]
+  };
+
+  const medicalBusinessData = {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "QiSol Health",
@@ -122,12 +151,49 @@ export default function Home({ params }: HomeProps) {
     },
   };
 
+  const websiteData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": currentLocale === 'th-TH' 
+      ? "QiSol - แผ่นฟิล์มไฮโดรเจลรักษาแผล" 
+      : currentLocale === 'en-US'
+      ? "QiSol - Hydrogel Wound Healing Film"
+      : "QiSol - ハイドロゲル創傷治癒フィルム",
+    "url": "https://qisolhealth.com",
+    "description": currentLocale === 'th-TH' 
+      ? "นวัตกรรมการรักษาแผลด้วยฟิล์มไฮโดรเจลละลายได้" 
+      : currentLocale === 'en-US'
+      ? "Advanced wound healing innovation with dissolving hydrogel film"
+      : "溶解性ハイドロゲルフィルムによる先進的な創傷治癒イノベーション",
+    "inLanguage": currentLocale === 'th-TH' ? 'th' : currentLocale === 'en-US' ? 'en' : 'ja',
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://qisolhealth.com?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <>
-      {/* Structured Data for SEO */}
+      {/* Structured Data for SEO - Organization */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
+      />
+      
+      {/* Structured Data for SEO - Medical Business */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalBusinessData) }}
+      />
+      
+      {/* Structured Data for SEO - Website */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
       />
 
       {!mounted ? (
@@ -161,6 +227,9 @@ export default function Home({ params }: HomeProps) {
             </AnimatePresence>
           </main>
           <Footer />
+          
+          {/* Cookie Consent Banner */}
+          <CookieConsent locale={currentLocale} />
         </>
       )}
     </>

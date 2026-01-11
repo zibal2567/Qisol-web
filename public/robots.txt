@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://qisolhealth.com
+
+# Sitemaps
+Sitemap: https://qisolhealth.com/sitemap.xml
