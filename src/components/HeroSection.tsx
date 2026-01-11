@@ -1,8 +1,11 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useSectionTracking } from '@/hooks/useScrollTracking';
+import { trackButtonClick } from '@/lib/analytics';
 
 interface HeroSectionProps {
   hero: {
@@ -14,6 +17,15 @@ interface HeroSectionProps {
 
 export default function HeroSection({ hero }: HeroSectionProps) {
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'th';
+  
+  // Track section view
+  const sectionRef = useSectionTracking({
+    sectionName: 'Hero Section',
+    pagePath: pathname,
+    language: locale
+  });
 
   // Memoize floating particles to prevent re-rendering
   const floatingParticles = useMemo(() => {
@@ -37,8 +49,21 @@ export default function HeroSection({ hero }: HeroSectionProps) {
 
   if (!mounted) return null;
 
+  const handleCTAClick = () => {
+    trackButtonClick({
+      button_name: 'Hero CTA',
+      button_location: 'Hero Section',
+      page_path: pathname,
+      language: locale
+    });
+    
+    // Scroll to contact section
+    const contactSection = document.getElementById('contact');
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53]">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53]">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{

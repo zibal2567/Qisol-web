@@ -1,8 +1,11 @@
 'use client';
 
 import { memo, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Shield, Zap, DollarSign, Atom } from 'lucide-react';
 import Image from 'next/image';
+import { useSectionTracking } from '@/hooks/useScrollTracking';
+import { trackButtonClick } from '@/lib/analytics';
 
 interface BenefitsSectionProps {
   benefits: {
@@ -18,12 +21,30 @@ interface BenefitsSectionProps {
 
 const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSectionProps) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'th';
+  
+  // Track section view
+  const sectionRef = useSectionTracking({
+    sectionName: 'Benefits Section',
+    pagePath: pathname,
+    language: locale
+  });
 
   // จับคู่ icon ให้ตามลำดับ metric
   const icons = [Shield, Zap, DollarSign];
+  
+  const handleBenefitClick = (benefitName: string) => {
+    trackButtonClick({
+      button_name: `Benefit Card - ${benefitName}`,
+      button_location: 'Benefits Section',
+      page_path: pathname,
+      language: locale
+    });
+  };
 
   return (
-    <section id="benefits" className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-gray-50">
+    <section ref={sectionRef} id="benefits" className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-gray-50">
 
       {/* Subtle Background Elements */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">
@@ -70,12 +91,13 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
             return (
               <div
                 key={index}
-                className={`group relative bg-white p-8 rounded-2xl border-2 transition-all duration-500 ${isHovered
+                className={`group relative bg-white p-8 rounded-2xl border-2 transition-all duration-500 cursor-pointer ${isHovered
                   ? "border-[#439b83] shadow-2xl"
                   : "border-gray-200 shadow-lg hover:shadow-xl"
                   }`}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
+                onClick={() => handleBenefitClick(metric.label)}
               >
                 {/* Background Gradient */}
                 <div

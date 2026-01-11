@@ -1,7 +1,9 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
+import { useSectionTracking } from '@/hooks/useScrollTracking';
 
 interface ResearchSectionProps {
   research: {
@@ -30,9 +32,19 @@ interface ResearchSectionProps {
 }
 
 export default function ResearchSection({ research }: ResearchSectionProps) {
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'th';
+  
+  // Track section view
+  const sectionRef = useSectionTracking({
+    sectionName: 'Research Section',
+    pagePath: pathname,
+    language: locale
+  });
 
   return (
     <section
+      ref={sectionRef}
       id="research"
       className="relative py-24 bg-gradient-to-br from-[#439b83]/15 via-[#367268]/10 to-[#2d5e53]/10 overflow-hidden"
     >

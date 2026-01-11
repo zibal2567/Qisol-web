@@ -1,8 +1,11 @@
 'use client';
 
 import { memo, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Settings, Beaker, Zap, CheckCircle, LucideIcon } from 'lucide-react';
 import Image from 'next/image';
+import { useSectionTracking } from '@/hooks/useScrollTracking';
+import { trackButtonClick } from '@/lib/analytics';
 
 interface TechnologySectionProps {
   technology: {
@@ -27,6 +30,15 @@ const iconMap: Record<string, LucideIcon> = { Settings, Beaker, Zap, CheckCircle
 const TechnologySection = memo(function TechnologySection({ technology }: TechnologySectionProps) {
   const [activeStep, setActiveStep] = useState(0);
   const [activeTab, setActiveTab] = useState<'process' | 'materials'>('process');
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'th';
+  
+  // Track section view
+  const sectionRef = useSectionTracking({
+    sectionName: 'Technology Section',
+    pagePath: pathname,
+    language: locale
+  });
 
   const techTabs = {
     process: {
@@ -40,9 +52,29 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
       content: technology.materials.content,
     },
   };
+  
+  const handleTabClick = (tab: 'process' | 'materials') => {
+    setActiveTab(tab);
+    trackButtonClick({
+      button_name: `Technology Tab - ${tab}`,
+      button_location: 'Technology Section',
+      page_path: pathname,
+      language: locale
+    });
+  };
+  
+  const handleStepClick = (step: number) => {
+    setActiveStep(step);
+    trackButtonClick({
+      button_name: `Technology Step - ${step + 1}`,
+      button_location: 'Technology Section',
+      page_path: pathname,
+      language: locale
+    });
+  };
 
   return (
-    <section id="technology" className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    <section ref={sectionRef} id="technology" className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-purple-50">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full filter blur-3xl"></div>
@@ -79,7 +111,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
               return (
                 <button
                   key={key}
-                  onClick={() => setActiveTab(key as 'process' | 'materials')}
+                  onClick={() => handleTabClick(key as 'process' | 'materials')}
                   className={`flex items-center gap-3 px-4 py-4 rounded-xl font-semibold transition-all duration-300 transform border-2 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer ${isActive ? 'bg-gradient-to-r from-[#439b83] to-[#439b83]/50 text-white border-[#439b83] shadow-[#439b83]/30' : 'bg-white text-gray-700 border-gray-200 hover:border-[#439b83]/50 hover:text-[#439b83]'
                     }`}
                 >
@@ -124,7 +156,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
                       key={index}
                       className={`relative p-6 rounded-xl border-2 transition-all duration-300 cursor-pointer ${activeStep === index ? 'bg-gradient-to-r from-[#439b83]/10 to-purple-50 border-[#439b83] shadow-lg' : 'bg-white border-gray-200 hover:border-[#439b83]/50 hover:shadow-md'
                         }`}
-                      onClick={() => setActiveStep(index)}
+                      onClick={() => handleStepClick(index)}
                     >
                       <div className="flex items-start gap-4">
                         <div

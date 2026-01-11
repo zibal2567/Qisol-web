@@ -1,13 +1,45 @@
 'use client';
 
 import { memo } from 'react';
+import { usePathname } from 'next/navigation';
 import { Mail, Phone, Linkedin, User } from 'lucide-react';
 import Image from 'next/image';
+import { useSectionTracking } from '@/hooks/useScrollTracking';
+import { trackButtonClick } from '@/lib/analytics';
 
 
 const ContactSection = memo(function ContactSection() {
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'th';
+  
+  // Track section view
+  const sectionRef = useSectionTracking({
+    sectionName: 'Contact Section',
+    pagePath: pathname,
+    language: locale
+  });
+
+  const handleContactClick = (contactType: string, value: string) => {
+    trackButtonClick({
+      button_name: `Contact - ${contactType}`,
+      button_location: 'Contact Section',
+      page_path: pathname,
+      language: locale
+    });
+    
+    // Open email/phone/social
+    if (contactType === 'Email') {
+      window.location.href = `mailto:${value}`;
+    } else if (contactType === 'Phone') {
+      window.location.href = `tel:${value}`;
+    } else if (contactType === 'LinkedIn') {
+      window.open(value, '_blank');
+    }
+  };
+
   return (
     <section
+      ref={sectionRef}
       id="contact"
       className="relative py-20 bg-gradient-to-br from-gray-100 via-slate-50 to-emerald-50"
     >
@@ -80,15 +112,24 @@ const ContactSection = memo(function ContactSection() {
               {/* Contact */}
               <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 p-8 rounded-3xl text-white shadow-2xl space-y-4">
                 <h3 className="text-2xl font-bold mb-6">Contact</h3>
-                <div className="flex items-center gap-4">
+                <div 
+                  className="flex items-center gap-4 cursor-pointer hover:text-emerald-300 transition-colors"
+                  onClick={() => handleContactClick('Phone', '0611830764')}
+                >
                   <Phone className="w-6 h-6 text-emerald-300" />
                   <span>0611830764</span>
                 </div>
-                <div className="flex items-center gap-4">
+                <div 
+                  className="flex items-center gap-4 cursor-pointer hover:text-emerald-300 transition-colors"
+                  onClick={() => handleContactClick('Email', 'mr.niaffan.muha@gmail.com')}
+                >
                   <Mail className="w-6 h-6 text-emerald-300" />
                   <span>mr.niaffan.muha@gmail.com</span>
                 </div>
-                <div className="flex items-center gap-4">
+                <div 
+                  className="flex items-center gap-4 cursor-pointer hover:text-emerald-300 transition-colors"
+                  onClick={() => handleContactClick('LinkedIn', 'https://www.linkedin.com/in/niaffan-muha')}
+                >
                   <Linkedin className="w-6 h-6 text-emerald-300" />
                   <span>Niaffan Muha</span>
                 </div>

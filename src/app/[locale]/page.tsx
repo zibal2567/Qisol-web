@@ -10,6 +10,8 @@ import { landingConfig } from "@/config/landing.config";
 import { ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
+import { trackPageView, trackLanguageChange } from "@/lib/analytics";
+import { useScrollDepthTracking, useTimeTracking } from "@/hooks/useScrollTracking";
 
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { ssr: false });
 const ProductSection = dynamic(() => import("@/components/ProductSection"), { ssr: false });
@@ -43,10 +45,27 @@ export default function Home({ params }: HomeProps) {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    
+    // Track page view when component mounts
+    if (typeof window !== 'undefined') {
+      trackPageView({
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: pathname,
+        language: currentLocale,
+      });
+    }
+  }, [pathname, currentLocale]);
+
+  // Track scroll depth and time on page
+  useScrollDepthTracking(pathname, currentLocale);
+  useTimeTracking();
 
   // Language change handler with URL navigation
   const handleLanguageChange = useCallback((newLang: "th-TH" | "en-US" | "ja-JP") => {
+    // Track language change
+    trackLanguageChange(currentLocale, newLang);
+    
     // Convert full locale to short URL format
     const reverseMap: Record<"th-TH" | "en-US" | "ja-JP", string> = {
       'th-TH': 'th',
@@ -64,7 +83,7 @@ export default function Home({ params }: HomeProps) {
       localStorage.setItem("qisol-language", newLang);
       document.cookie = `qisol-language=${newLang}; path=/; max-age=${365 * 24 * 60 * 60}`;
     }
-  }, [router, pathname]);
+  }, [router, pathname, currentLocale]);
 
   const config = useMemo(() => {
     return landingConfig[currentLocale] || landingConfig["th-TH"];

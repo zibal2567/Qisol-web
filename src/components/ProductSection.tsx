@@ -1,9 +1,12 @@
 'use client';
 
 import { memo } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { useSectionTracking } from '@/hooks/useScrollTracking';
+import { trackButtonClick } from '@/lib/analytics';
 
 interface ProductSectionProps {
   product: {
@@ -17,8 +20,28 @@ interface ProductSectionProps {
 }
 
 const ProductSection = memo(function ProductSection({ product, features }: ProductSectionProps) {
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'th';
+  
+  // Track section view
+  const sectionRef = useSectionTracking({
+    sectionName: 'Product Section',
+    pagePath: pathname,
+    language: locale
+  });
+
+  const handlePatentClick = () => {
+    trackButtonClick({
+      button_name: 'Patent Badge',
+      button_location: 'Product Section',
+      page_path: pathname,
+      language: locale
+    });
+  };
+
   return (
     <section
+      ref={sectionRef}
       id="product"
       className="py-20 relative min-h-screen flex items-center overflow-hidden"
     >
@@ -49,10 +72,10 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
                   />
                 </motion.div>
               </div>
-              <div className="absolute -top-6 -right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+              <div className="absolute -top-6 -right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg cursor-pointer hover:bg-green-600 transition-colors" onClick={handlePatentClick}>
                 IP Number: 2503000774
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+              <div className="absolute -bottom-6 -left-6 bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg cursor-pointer hover:bg-green-700 transition-colors" onClick={handlePatentClick}>
                 Quercus infectoria
               </div>
             </div>
