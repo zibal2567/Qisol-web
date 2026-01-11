@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
+import { ImageZoom } from '@/components/ui/ImageZoom';
 
 interface ResearchSectionProps {
   research: {
@@ -34,7 +35,7 @@ interface ResearchSectionProps {
 export default function ResearchSection({ research }: ResearchSectionProps) {
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'th';
-  
+
   // Track section view
   const sectionRef = useSectionTracking({
     sectionName: 'Research Section',
@@ -90,13 +91,12 @@ export default function ResearchSection({ research }: ResearchSectionProps) {
                       className="text-center sm:p-5 p-2 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-md hover:shadow-lg border border-gray-100 transition-all duration-300"
                     >
                       <div
-                        className={`text-[14px] sm:text-3xl font-extrabold mb-1 ${
-                          stat.color === 'emerald'
+                        className={`text-[14px] sm:text-3xl font-extrabold mb-1 ${stat.color === 'emerald'
                             ? 'text-emerald-600'
                             : stat.color === 'blue'
-                            ? 'text-blue-600'
-                            : 'text-purple-600'
-                        }`}
+                              ? 'text-blue-600'
+                              : 'text-purple-600'
+                          }`}
                       >
                         {stat.value}
                       </div>
@@ -124,14 +124,15 @@ export default function ResearchSection({ research }: ResearchSectionProps) {
               {/* Visual */}
               <div className="sm:-mt-0 -mt-5 flex justify-center lg:justify-center">
                 <div className="relative group">
-                  <Image
-                    src="/Image/Research.png"
-                    alt="Research Visual"
-                    width={420}
-                    height={420}
-                    className="rounded-2xl shadow-lg object-cover transform group-hover:scale-105 transition duration-500"
-                  />
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-[#439b83]/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <ImageZoom>
+                    <Image
+                      src="/Image/Research.png"
+                      alt="Research Visual"
+                      width={420}
+                      height={420}
+                      className="rounded-2xl shadow-lg object-cover transform transition duration-500"
+                    />
+                  </ImageZoom>
                 </div>
               </div>
             </div>

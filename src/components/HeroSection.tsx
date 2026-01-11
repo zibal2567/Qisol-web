@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { trackButtonClick } from '@/lib/analytics';
+import { ImageZoom } from '@/components/ui/ImageZoom';
 
 interface HeroSectionProps {
   hero: {
@@ -19,7 +20,7 @@ export default function HeroSection({ hero }: HeroSectionProps) {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'th';
-  
+
   // Track section view
   const sectionRef = useSectionTracking({
     sectionName: 'Hero Section',
@@ -48,7 +49,6 @@ export default function HeroSection({ hero }: HeroSectionProps) {
   }, []);
 
   if (!mounted) return null;
-
   const handleCTAClick = () => {
     trackButtonClick({
       button_name: 'Hero CTA',
@@ -56,7 +56,7 @@ export default function HeroSection({ hero }: HeroSectionProps) {
       page_path: pathname,
       language: locale
     });
-    
+
     // Scroll to contact section
     const contactSection = document.getElementById('contact');
     contactSection?.scrollIntoView({ behavior: 'smooth' });
@@ -90,7 +90,6 @@ export default function HeroSection({ hero }: HeroSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="relative text-center lg:text-left">
-            {/* Logo ซ้อนทับ */}
             <div className="absolute -top-6 sm:-top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-90">
               <Image
                 src="/Image/LOGO.png"
@@ -126,13 +125,17 @@ export default function HeroSection({ hero }: HeroSectionProps) {
             </div>
 
             {/* รูปสินค้า */}
-            <div className="absolute sm:-top-32 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-128 sm:h-128">
-              <Image
-                src="/Image/Demo.png"
-                alt="QI-SOL Product"
-                fill
-                className="object-contain drop-shadow-xl"
-              />
+            <div className="absolute sm:left-57 sm:-top-32 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-128 sm:h-128">
+              <ImageZoom>
+                <Image
+                  alt="QI-SOL Product"
+                  className="object-contain drop-shadow-xl"
+                  height={650}
+                  src="/Image/Demo.png"
+                  unoptimized
+                  width={450}
+                />
+              </ImageZoom>
             </div>
           </motion.div>
         </div>

@@ -6,6 +6,7 @@ import { Settings, Beaker, Zap, CheckCircle, LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { trackButtonClick } from '@/lib/analytics';
+import { ImageZoom } from '@/components/ui/ImageZoom';
 
 interface TechnologySectionProps {
   technology: {
@@ -32,7 +33,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
   const [activeTab, setActiveTab] = useState<'process' | 'materials'>('process');
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'th';
-  
+
   // Track section view
   const sectionRef = useSectionTracking({
     sectionName: 'Technology Section',
@@ -52,7 +53,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
       content: technology.materials.content,
     },
   };
-  
+
   const handleTabClick = (tab: 'process' | 'materials') => {
     setActiveTab(tab);
     trackButtonClick({
@@ -62,7 +63,7 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
       language: locale
     });
   };
-  
+
   const handleStepClick = (step: number) => {
     setActiveStep(step);
     trackButtonClick({
@@ -98,7 +99,9 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
             {technology.desc}
           </p>
           <div className="flex justify-center">
-            <Image src="/Image/Core_Technology.png" alt="Core_Technology" width={1200} height={675} className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl" />
+            <ImageZoom>
+              <Image src="/Image/Core_Technology.png" alt="Core_Technology" width={1200} height={675} className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl" />
+            </ImageZoom>
           </div>
         </div>
 
@@ -185,7 +188,11 @@ const TechnologySection = memo(function TechnologySection({ technology }: Techno
                 </div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-4">{technology.materials.title}</h3>
               </div>
-              <div className="flex justify-center my-5"> <Image src="/Image/Innovation.png" alt="QI-SOL-Innovation" width={1200} height={675} className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl" /> </div>
+              <div className="flex justify-center my-5"> 
+                <ImageZoom>
+                  <Image src="/Image/Innovation.png" alt="QI-SOL-Innovation" width={1200} height={675} className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl" />
+                </ImageZoom>
+              </div>
             </div>
           )}
         </div>

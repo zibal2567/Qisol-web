@@ -22,7 +22,7 @@ interface ProductSectionProps {
 const ProductSection = memo(function ProductSection({ product, features }: ProductSectionProps) {
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'th';
-  
+
   // Track section view
   const sectionRef = useSectionTracking({
     sectionName: 'Product Section',
@@ -63,13 +63,13 @@ const ProductSection = memo(function ProductSection({ product, features }: Produ
                   transition={{ repeat: Infinity, duration: 4 }}
                   className="absolute -top-5 sm:-top-12 left-1/2 -translate-x-1/2 w-72 h-72 sm:w-[420px] sm:h-[420px]"
                 >
-                  <Image
-                    src="/Image/Product.png"
-                    alt="QiSol Product"
-                    fill
-                    className="object-contain drop-shadow-2xl"
-                    priority
-                  />
+                    <Image
+                      src="/Image/Product.png"
+                      alt="QiSol Product"
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                      priority
+                    />
                 </motion.div>
               </div>
               <div className="absolute -top-6 -right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg cursor-pointer hover:bg-green-600 transition-colors" onClick={handlePatentClick}>

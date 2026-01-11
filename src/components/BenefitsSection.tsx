@@ -6,6 +6,7 @@ import { Shield, Zap, DollarSign, Atom } from 'lucide-react';
 import Image from 'next/image';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { trackButtonClick } from '@/lib/analytics';
+import { ImageZoom } from '@/components/ui/ImageZoom';
 
 interface BenefitsSectionProps {
   benefits: {
@@ -23,7 +24,7 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'th';
-  
+
   // Track section view
   const sectionRef = useSectionTracking({
     sectionName: 'Benefits Section',
@@ -33,7 +34,7 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
 
   // จับคู่ icon ให้ตามลำดับ metric
   const icons = [Shield, Zap, DollarSign];
-  
+
   const handleBenefitClick = (benefitName: string) => {
     trackButtonClick({
       button_name: `Benefit Card - ${benefitName}`,
@@ -72,13 +73,15 @@ const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSect
 
           {/* Benefits Image */}
           <div className="flex justify-center my-10">
-            <Image
-              src="/Image/Benefits.png"
-              alt="QI-SOL-Benefits"
-              width={1200}
-              height={675}
-              className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl"
-            />
+            <ImageZoom>
+              <Image
+                src="/Image/Benefits.png"
+                alt="QI-SOL-Benefits"
+                width={1200}
+                height={675}
+                className="object-contain drop-shadow-2xl w-full h-auto max-w-4xl"
+              />
+            </ImageZoom>
           </div>
         </div>
 
