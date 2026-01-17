@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   },
   description:
     "QiSol พัฒนาแผ่นฟิล์มไฮโดรเจลละลายได้ผสานสารสกัดปูดเบญกานี เร่งการรักษาแผล ลดการติดเชื้อ เหมาะสำหรับแผลเบาหวานและแผลกดทับ",
+  icons:{
+    icon: 'src/app/favicon.ico'
+  },
   keywords: [
     "QiSol",
     "ฟิล์มรักษาแผล",
@@ -99,6 +102,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/Image/LOGO.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/Image/LOGO.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/Image/LOGO.png" />
+        <link rel="icon" href="/path/to/favicon.ico">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-E1DP3NB2VK"
           strategy="afterInteractive"
