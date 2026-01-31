@@ -80,7 +80,7 @@ export default function Footer() {
                                                 rel="noopener noreferrer"
                                                 className="text-white hover:text-gray-200 transition-colors font-medium"
                                           >
-                                                Lutfee
+                                                Lutfee Eiei
                                           </a>
                                     </span>
                               </div>
