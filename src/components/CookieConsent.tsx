@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cookie, X, Shield, BarChart3, Settings } from "lucide-react";
+import { getCookieConsent, setCookieConsent } from "@/lib/cookies";
 
 interface CookieConsentProps {
       locale: "th-TH" | "en-US" | "ja-JP";
@@ -85,31 +86,27 @@ export default function CookieConsent({ locale }: CookieConsentProps) {
       };
 
       useEffect(() => {
-            // Check if user has already made a choice
-            const consent = localStorage.getItem("cookieConsent");
+            // Check if user has already made a choice from cookie
+            const consent = getCookieConsent();
             if (!consent) {
                   // Show banner after 1 second delay
                   setTimeout(() => setShowBanner(true), 1000);
                   setShowFloatingButton(false);
             } else {
-                  // Load saved preferences and show floating button
+                  // Load saved preferences from cookie and show floating button
                   setShowFloatingButton(true);
-                  try {
-                        const saved = JSON.parse(consent);
-                        setPreferences(saved);
-                        // Initialize analytics if user consented
-                        if (saved.analytics) {
-                              initializeAnalytics();
-                        }
-                  } catch (e) {
-                        console.error("Error parsing cookie consent:", e);
+                  setPreferences(consent);
+                  // Initialize analytics if user consented
+                  if (consent.analytics) {
+                        initializeAnalytics();
                   }
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
       const saveConsent = (prefs: typeof preferences) => {
-            localStorage.setItem("cookieConsent", JSON.stringify(prefs));
+            // Save to cookie (single source of truth)
+            setCookieConsent(prefs);
             setPreferences(prefs);
             setShowBanner(false);
             setShowSettings(false);
@@ -119,9 +116,6 @@ export default function CookieConsent({ locale }: CookieConsentProps) {
             if (prefs.analytics) {
                   initializeAnalytics();
             }
-
-            // Set cookie for server-side tracking
-            document.cookie = `cookieConsent=${JSON.stringify(prefs)}; max-age=31536000; path=/; SameSite=Lax`;
       };
 
       const handleAcceptAll = () => {

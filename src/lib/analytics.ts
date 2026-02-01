@@ -34,22 +34,13 @@ interface FormSubmitParams {
   language: string;
 }
 
+import { hasAnalyticsConsent } from './cookies';
+
 /**
  * Check if user has consented to analytics
+ * Now using cookie-based consent checking
  */
-const hasAnalyticsConsent = (): boolean => {
-  if (typeof window === 'undefined') return false;
-  
-  try {
-    const consent = localStorage.getItem('cookieConsent');
-    if (!consent) return false;
-    
-    const preferences = JSON.parse(consent);
-    return preferences.analytics === true;
-  } catch {
-    return false;
-  }
-};
+// Consent checking is now imported from cookies.ts
 
 /**
  * Track Page View

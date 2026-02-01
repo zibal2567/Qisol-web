@@ -11,6 +11,7 @@ import { ChevronUp } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
 import { trackPageView, trackLanguageChange } from "@/lib/analytics";
 import { useScrollDepthTracking, useTimeTracking } from "@/hooks/useScrollTracking";
+import { setLanguageCookie } from "@/lib/cookies";
 
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { ssr: false });
 const ProductSection = dynamic(() => import("@/components/ProductSection"), { ssr: false });
@@ -23,7 +24,6 @@ interface HomeProps {
   params: Promise<{ locale: string }>;
 }
 
-// Locale mapping from URL to config
 const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
   'th': 'th-TH',
   'en': 'en-US',
@@ -41,16 +41,13 @@ export default function Home({ params }: HomeProps) {
   const circumference = 2 * Math.PI * radius;
   const dashoffset = circumference * (1 - progress);
 
-  // Unwrap params using React.use()
   const resolvedParams = use(params);
 
-  // Convert short URL locale to full config locale
   const currentLocale = localeMap[resolvedParams.locale] || 'th-TH';
 
   useEffect(() => {
     setMounted(true);
 
-    // Track page view when component mounts
     if (typeof window !== 'undefined') {
       trackPageView({
         page_title: document.title,
@@ -61,16 +58,12 @@ export default function Home({ params }: HomeProps) {
     }
   }, [pathname, currentLocale]);
 
-  // Track scroll depth and time on page
   useScrollDepthTracking(pathname, currentLocale);
   useTimeTracking();
 
-  // Language change handler with URL navigation
   const handleLanguageChange = useCallback((newLang: "th-TH" | "en-US" | "ja-JP") => {
-    // Track language change
     trackLanguageChange(currentLocale, newLang);
 
-    // Convert full locale to short URL format
     const reverseMap: Record<"th-TH" | "en-US" | "ja-JP", string> = {
       'th-TH': 'th',
       'en-US': 'en',
@@ -78,14 +71,11 @@ export default function Home({ params }: HomeProps) {
     }
     const shortLocale = reverseMap[newLang]
 
-    // Navigate to the new locale URL
-    const currentPath = pathname.split('/').slice(2).join('/'); // Remove /[locale] part
+    const currentPath = pathname.split('/').slice(2).join('/'); 
     router.push(`/${shortLocale}/${currentPath}`);
 
-    // Save to localStorage and cookie
     if (typeof window !== "undefined") {
-      localStorage.setItem("qisol-language", newLang);
-      document.cookie = `qisol-language=${newLang}; path=/; max-age=${365 * 24 * 60 * 60}`;
+      setLanguageCookie(newLang);
     }
   }, [router, pathname, currentLocale]);
 
