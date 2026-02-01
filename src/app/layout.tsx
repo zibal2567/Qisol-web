@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   },
   description:
     "QiSol พัฒนาแผ่นฟิล์มไฮโดรเจลละลายได้ผสานสารสกัดปูดเบญกานี เร่งการรักษาแผล ลดการติดเชื้อ เหมาะสำหรับแผลเบาหวานและแผลกดทับ",
+  icons:{
+    icon: 'src/app/favicon.ico'
+  },
   keywords: [
     "QiSol",
     "ฟิล์มรักษาแผล",
