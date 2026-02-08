@@ -17,9 +17,30 @@
     }
   },
   "footer": {
-    "description": "革新的なハイドロゲルフィルム創傷ケア",
-    "quickLinks": "クイックリンク",
-    "followUs": "フォローする",
-    "copyright": "© 2024 QiSol Health. 全著作権所有."
+    "contactTitle": "お問い合わせ/製品注文",
+    "copyright": "© 2025 Qisol. 全著作権所有。",
+    "madeBy": "製作者"
+  },
+  "contact": {
+    "badge": "私たちのチーム",
+    "title": "私たちのチーム",
+    "ceo": {
+      "name": "NIAFFAN MUHA",
+      "nickname": "PANG",
+      "position": "CEO"
+    },
+    "cto1": {
+      "name": "Dr. CHANAWEE JAKKAWANPITAK",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "cto2": {
+      "name": "DR. SUTTIWAN WUNNOO",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "contactCard": {
+      "title": "お問い合わせ"
+    }
   }
 }

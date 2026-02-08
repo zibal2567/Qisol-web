@@ -17,9 +17,30 @@
     }
   },
   "footer": {
-    "description": "นวัตกรรมแผ่นฟิล์มไฮโดรเจลรักษาแผล",
-    "quickLinks": "ลิงก์ด่วน",
-    "followUs": "ติดตามเรา",
-    "copyright": "© 2024 QiSol Health. สงวนลิขสิทธิ์."
+    "contactTitle": "ติดต่อ/สั่งซื้อผลิตภัณฑ์",
+    "copyright": "© 2025 Qisol. สงวนลิขสิทธิ์.",
+    "madeBy": "สร้างโดย"
+  },
+  "contact": {
+    "badge": "ทีมของเรา",
+    "title": "ทีมของเรา",
+    "ceo": {
+      "name": "NIAFFAN MUHA",
+      "nickname": "PANG",
+      "position": "CEO"
+    },
+    "cto1": {
+      "name": "Dr. CHANAWEE JAKKAWANPITAK",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "cto2": {
+      "name": "DR. SUTTIWAN WUNNOO",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "contactCard": {
+      "title": "ติดต่อ"
+    }
   }
 }

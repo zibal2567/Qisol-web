@@ -1,6 +1,9 @@
+'use client';
+
 import { Phone } from "lucide-react"
 import Image from "next/image"
 import { contectConfig } from "@/config/contect"
+import { useTranslations } from "next-intl"
 
 const linkMap: Record<string, (val: string) => string> = {
       tel: (val) => `tel:${val}`,
@@ -10,6 +13,8 @@ const linkMap: Record<string, (val: string) => string> = {
 };
 
 export default function Footer() {
+      const t = useTranslations('footer');
+      
       return (
             <footer className="bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] text-white text-sm">
                   {/* Main Footer */}
@@ -45,7 +50,7 @@ export default function Footer() {
                               {/* Right: Contact Info */}
                               <div className="space-y-6 text-center md:text-left">
                                     <h4 className="font-semibold text-lg text-white flex items-center justify-center md:justify-start gap-3">
-                                          Contact/Order Products
+                                          {t('contactTitle')}
                                           <span className="hidden md:inline-block w-20 border-t border-white/40" />
                                     </h4>
                                     <ul className="space-y-3 text-gray-200">
@@ -70,10 +75,10 @@ export default function Footer() {
                   <div className="border-t border-white/20">
                         <div className="container mx-auto px-4 py-4">
                               <div className="text-gray-200 text-center text-sm sm:text-base space-x-2">
-                                    <span>© 2025 Qisol. All rights reserved.</span>
+                                    <span>{t('copyright')}</span>
                                     <br />
                                     <span>
-                                          Made by{" "}
+                                          {t('madeBy')}{" "}
                                           <a
                                                 href="https://dl-lutfee.vercel.app/"
                                                 target="_blank"

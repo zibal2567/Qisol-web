@@ -17,9 +17,30 @@
     }
   },
   "footer": {
-    "description": "Innovative Hydrogel Film for Wound Care",
-    "quickLinks": "Quick Links",
-    "followUs": "Follow Us",
-    "copyright": "© 2024 QiSol Health. All rights reserved."
+    "contactTitle": "Contact/Order Products",
+    "copyright": "© 2025 Qisol. All rights reserved.",
+    "madeBy": "Made by"
+  },
+  "contact": {
+    "badge": "Our Teams",
+    "title": "Our Teams",
+    "ceo": {
+      "name": "NIAFFAN MUHA",
+      "nickname": "PANG",
+      "position": "CEO"
+    },
+    "cto1": {
+      "name": "Dr. CHANAWEE JAKKAWANPITAK",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "cto2": {
+      "name": "DR. SUTTIWAN WUNNOO",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "contactCard": {
+      "title": "Contact"
+    }
   }
 }
