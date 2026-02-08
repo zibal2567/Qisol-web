@@ -1,40 +1,32 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
-interface ResearchSectionProps {
-  research: {
+export default function ResearchSection() {
+  const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations('home');
+  
+  const research = t.raw('research') as {
     title: string;
     description: string;
     details: string[];
     overview: {
       title: string;
       description: string;
-      stats: {
-        label: string;
-        value: string;
-        color: string;
-      }[];
+      stats: { label: string; value: string; color: string }[];
     };
     methodology: {
       title: string;
       description: string;
-      methods: {
-        step: string;
-        title: string;
-        desc: string;
-      }[];
+      methods: { step: string; title: string; desc: string }[];
     };
   };
-}
-
-export default function ResearchSection({ research }: ResearchSectionProps) {
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'th';
 
   // Track section view
   const sectionRef = useSectionTracking({

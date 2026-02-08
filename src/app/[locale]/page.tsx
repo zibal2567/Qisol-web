@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useState, useMemo, useCallback, use } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState, use } from "react";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
+import SecondaryNavbar from "@/components/SecondaryNavbar";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
-import { landingConfig } from "@/config/landing.config";
 import { ChevronUp } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
-import { trackPageView, trackLanguageChange } from "@/lib/analytics";
+import { trackPageView } from "@/lib/analytics";
 import { useScrollDepthTracking, useTimeTracking } from "@/hooks/useScrollTracking";
-import { setLanguageCookie } from "@/lib/cookies";
 
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { ssr: false });
 const ProductSection = dynamic(() => import("@/components/ProductSection"), { ssr: false });
@@ -31,8 +30,8 @@ const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
 }
 
 export default function Home({ params }: HomeProps) {
-  const router = useRouter();
   const pathname = usePathname();
+  
   const [mounted, setMounted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(false);
@@ -60,28 +59,6 @@ export default function Home({ params }: HomeProps) {
 
   useScrollDepthTracking(pathname, currentLocale);
   useTimeTracking();
-
-  const handleLanguageChange = useCallback((newLang: "th-TH" | "en-US" | "ja-JP") => {
-    trackLanguageChange(currentLocale, newLang);
-
-    const reverseMap: Record<"th-TH" | "en-US" | "ja-JP", string> = {
-      'th-TH': 'th',
-      'en-US': 'en',
-      'ja-JP': 'ja'
-    }
-    const shortLocale = reverseMap[newLang]
-
-    const currentPath = pathname.split('/').slice(2).join('/'); 
-    router.push(`/${shortLocale}/${currentPath}`);
-
-    if (typeof window !== "undefined") {
-      setLanguageCookie(newLang);
-    }
-  }, [router, pathname, currentLocale]);
-
-  const config = useMemo(() => {
-    return landingConfig[currentLocale] || landingConfig["th-TH"];
-  }, [currentLocale]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -212,13 +189,14 @@ export default function Home({ params }: HomeProps) {
         <LoadingScreen />
       ) : (
         <>
-          <Navbar lang={currentLocale} setLang={handleLanguageChange} />
+          <Navbar />
+          <SecondaryNavbar />
           <main className="relative min-h-screen">
-            <HeroSection hero={config.hero} />
-            <ProductSection product={config.product} features={config.features} />
-            <BenefitsSection benefits={config.benefits} />
-            <TechnologySection technology={config.technology} />
-            <ResearchSection research={config.research} />
+            <HeroSection />
+            <ProductSection />
+            <BenefitsSection />
+            <TechnologySection />
+            <ResearchSection />
             <ContactSection />
 
             {/* Scroll-to-Top Button */}

@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "logo": "QiSol",
+    "links": [
+      { "href": "/", "label": "ホーム" },
+      { "href": "/products", "label": "製品" },
+      { "href": "/reviews", "label": "レビュー" },
+      { "href": "/about", "label": "会社概要" },
+      { "href": "/contact", "label": "お問い合わせ" }
+    ],
+    "secondary": {
+      "product": "製品",
+      "benefits": "利点",
+      "technology": "技術",
+      "research": "研究",
+      "contact": "お問い合わせ"
+    }
+  },
+  "footer": {
+    "description": "革新的なハイドロゲルフィルム創傷ケア",
+    "quickLinks": "クイックリンク",
+    "followUs": "フォローする",
+    "copyright": "© 2024 QiSol Health. 全著作権所有."
+  }
+}

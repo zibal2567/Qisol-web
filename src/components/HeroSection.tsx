@@ -2,24 +2,17 @@
 
 import { useEffect, useState, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
-import { trackButtonClick } from '@/lib/analytics';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
-interface HeroSectionProps {
-  hero: {
-    title: string;
-    subtitle: string;
-    cta: string;
-  };
-}
-
-export default function HeroSection({ hero }: HeroSectionProps) {
+export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'th';
+  const locale = useLocale();
+  const t = useTranslations('home.hero');
 
   // Track section view
   const sectionRef = useSectionTracking({
@@ -49,18 +42,6 @@ export default function HeroSection({ hero }: HeroSectionProps) {
   }, []);
 
   if (!mounted) return null;
-  const handleCTAClick = () => {
-    trackButtonClick({
-      button_name: 'Hero CTA',
-      button_location: 'Hero Section',
-      page_path: pathname,
-      language: locale
-    });
-
-    // Scroll to contact section
-    const contactSection = document.getElementById('contact');
-    contactSection?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53]">
@@ -103,12 +84,12 @@ export default function HeroSection({ hero }: HeroSectionProps) {
 
             {/* Title */}
             <h2 className="pt-10 text-xl sm:text-3xl lg:text-4xl font-bold text-white">
-              {hero.title.split(" – ")[1]}
+              {t('title').split(" – ")[1]}
             </h2>
 
             {/* Subtitle */}
             <p className="mt-2 text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              {hero.subtitle}
+              {t('subtitle')}
             </p>
           </div>
 

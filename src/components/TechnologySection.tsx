@@ -2,14 +2,23 @@
 
 import { memo, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import { Settings, Beaker, Zap, CheckCircle, LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { trackButtonClick } from '@/lib/analytics';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
-interface TechnologySectionProps {
-  technology: {
+const iconMap: Record<string, LucideIcon> = { Settings, Beaker, Zap, CheckCircle };
+
+const TechnologySection = memo(function TechnologySection() {
+  const [activeStep, setActiveStep] = useState(0);
+  const [activeTab, setActiveTab] = useState<'process' | 'materials'>('process');
+  const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations('home');
+  
+  const technology = t.raw('technology') as {
     title: string;
     desc: string;
     items: Array<{ title: string; desc: string }>;
@@ -24,15 +33,6 @@ interface TechnologySectionProps {
       content: Array<{ title: string; desc: string }>;
     };
   };
-}
-
-const iconMap: Record<string, LucideIcon> = { Settings, Beaker, Zap, CheckCircle };
-
-const TechnologySection = memo(function TechnologySection({ technology }: TechnologySectionProps) {
-  const [activeStep, setActiveStep] = useState(0);
-  const [activeTab, setActiveTab] = useState<'process' | 'materials'>('process');
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'th';
 
   // Track section view
   const sectionRef = useSectionTracking({

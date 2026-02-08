@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "logo": "QiSol",
+    "links": [
+      { "href": "/", "label": "หน้าหลัก" },
+      { "href": "/products", "label": "ผลิตภัณฑ์" },
+      { "href": "/reviews", "label": "รีวิวจากผู้ใช้จริง" },
+      { "href": "/about", "label": "เกี่ยวกับเรา" },
+      { "href": "/contact", "label": "ติดต่อเรา" }
+    ],
+    "secondary": {
+      "product": "ผลิตภัณฑ์",
+      "benefits": "ประโยชน์",
+      "technology": "เทคโนโลยี",
+      "research": "วิจัย",
+      "contact": "ติดต่อ"
+    }
+  },
+  "footer": {
+    "description": "นวัตกรรมแผ่นฟิล์มไฮโดรเจลรักษาแผล",
+    "quickLinks": "ลิงก์ด่วน",
+    "followUs": "ติดตามเรา",
+    "copyright": "© 2024 QiSol Health. สงวนลิขสิทธิ์."
+  }
+}

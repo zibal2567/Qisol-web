@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation'
-import { use } from 'react'
-import type { Metadata } from 'next'
-
-const locales = ['th', 'en', 'ja']
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages} from 'next-intl/server';
+import {notFound} from 'next/navigation';
+import {routing} from '@/i18n/routing';
+import type {Metadata} from 'next';
 
 // Metadata สำหรับแต่ละภาษา
 const metadataByLocale: Record<string, Metadata> = {
@@ -105,23 +105,29 @@ export async function generateMetadata({
 }
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }))
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params
 }: {
   children: React.ReactNode
   params: Promise<{ locale: string }>
 }) {
-  // Unwrap params using React.use()
-  const { locale } = use(params)
+  const { locale } = await params
   
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale)) {
-    notFound()
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as 'th' | 'en' | 'ja')) {
+    notFound();
   }
 
-  return children
+  // Providing all messages to the client side
+  const messages = await getMessages();
+
+  return (
+    <NextIntlClientProvider messages={messages}>
+      {children}
+    </NextIntlClientProvider>
+  );
 }

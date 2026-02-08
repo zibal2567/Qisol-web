@@ -2,26 +2,20 @@
 
 import { memo } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { trackButtonClick } from '@/lib/analytics';
 
-interface ProductSectionProps {
-  product: {
-    title: string;
-    description: string;
-  };
-  features: {
-    title: string;
-    items: string[];
-  };
-}
-
-const ProductSection = memo(function ProductSection({ product, features }: ProductSectionProps) {
+const ProductSection = memo(function ProductSection() {
   const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'th';
+  const locale = useLocale();
+  const t = useTranslations('home');
+  
+  const product = t.raw('product') as { title: string; description: string };
+  const features = t.raw('features') as { title: string; items: string[] };
 
   // Track section view
   const sectionRef = useSectionTracking({

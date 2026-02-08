@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Privacy Policy - QiSol Health",
+    "description": "Privacy Policy in accordance with Thailand's Personal Data Protection Act 2019 (PDPA)"
+  },
+  "hero": {
+    "title": "Privacy Policy",
+    "subtitle": "In accordance with Thailand's Personal Data Protection Act 2019 (PDPA)",
+    "lastUpdated": "Last Updated: January 8, 2026"
+  },
+  "sections": [
+    {
+      "icon": "Shield",
+      "title": "1. Information We Collect",
+      "content": [
+        "Personal Information: Name, email, phone number",
+        "Usage Data: IP address, browser type, device information",
+        "Cookies and Tracking: Google Analytics, cookies",
+        "Contact Information: Messages sent through contact forms"
+      ]
+    },
+    {
+      "icon": "Eye",
+      "title": "2. Purpose of Data Use",
+      "content": [
+        "Improve website user experience",
+        "Analyze user behavior to develop services",
+        "Respond to inquiries",
+        "Send product and service information (with consent)",
+        "Comply with applicable laws and regulations"
+      ]
+    },
+    {
+      "icon": "Lock",
+      "title": "3. Data Security",
+      "content": [
+        "Data encryption with SSL/TLS",
+        "Secure server storage",
+        "Limited access to authorized personnel only",
+        "Regular security audits and updates",
+        "No disclosure to third parties (except as required by law)"
+      ]
+    },
+    {
+      "icon": "UserCheck",
+      "title": "4. Data Subject Rights (PDPA)",
+      "content": [
+        "Right of Access: View the data we hold",
+        "Right to Rectification: Correct inaccurate data",
+        "Right to Erasure: Request deletion of personal data",
+        "Right to Object: Object to data processing",
+        "Right to Data Portability: Receive data in electronic format",
+        "Right to Withdraw Consent: Cancel consent at any time"
+      ]
+    },
+    {
+      "icon": "FileText",
+      "title": "5. Cookies",
+      "content": [
+        "Necessary Cookies: For basic website functionality",
+        "Analytics Cookies: Google Analytics (stored for 26 months)",
+        "Marketing Cookies: For relevant advertising (requires consent)",
+        "You can manage cookies through website settings"
+      ]
+    }
+  ],
+  "footer": "Please check regularly. If you have questions, please contact us."
+}

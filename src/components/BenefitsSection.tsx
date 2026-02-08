@@ -2,28 +2,24 @@
 
 import { memo, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import { Shield, Zap, DollarSign, Atom } from 'lucide-react';
 import Image from 'next/image';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { trackButtonClick } from '@/lib/analytics';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
-interface BenefitsSectionProps {
-  benefits: {
-    title: string;
-    desc: string;
-    metrics: {
-      value: string;
-      label: string;
-      detail: string;
-    }[];
-  };
-}
-
-const BenefitsSection = memo(function BenefitsSection({ benefits }: BenefitsSectionProps) {
+const BenefitsSection = memo(function BenefitsSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'th';
+  const locale = useLocale();
+  const t = useTranslations('home');
+  
+  const benefits = t.raw('benefits') as {
+    title: string;
+    desc: string;
+    metrics: { value: string; label: string; detail: string }[];
+  };
 
   // Track section view
   const sectionRef = useSectionTracking({
