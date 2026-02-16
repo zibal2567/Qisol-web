@@ -5,12 +5,11 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { awardsConfig } from '@/config/awards.config';
-import { Award, Star, ShieldCheck, Trophy, Sparkles, ArrowRight } from 'lucide-react';
+import { Award, Star, ShieldCheck, Trophy } from 'lucide-react';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
 export default function RewardsPage() {
     const t = useTranslations('rewards');
-    const tCommon = useTranslations();
 
     const featuredAward = awardsConfig[0];
     const otherAwards = awardsConfig.slice(1);

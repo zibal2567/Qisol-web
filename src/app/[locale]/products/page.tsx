@@ -5,8 +5,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { productsConfig } from '@/config/products.config';
 import {
-    CheckCircle,
-    Sparkles,
     Droplets,
     ShieldCheck,
     Leaf,
@@ -17,7 +15,7 @@ import {
 } from 'lucide-react';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ElementType> = {
     dissolvable: Droplets,
     healing: Zap,
     antimicrobial: ShieldCheck,
@@ -28,7 +26,6 @@ const iconMap: Record<string, any> = {
 
 export default function ProductsPage() {
     const t = useTranslations('products');
-    const tCommon = useTranslations('common');
 
     const containerVariants = {
         hidden: { opacity: 0 },
