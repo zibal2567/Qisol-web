@@ -20,7 +20,7 @@ export default function Navbar() {
   const locale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
-  
+
   const [scrolled, setScrolled] = useState(false)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
@@ -38,12 +38,12 @@ export default function Navbar() {
   ]
 
   const currentLang = languages.find((l) => l.code === locale) || languages[0]
-  
+
   const handleLanguageChange = (newLocale: "th" | "en" | "ja") => {
     // เก็บ scroll position ปัจจุบัน
     const currentScrollY = window.scrollY
     sessionStorage.setItem('scrollPosition', currentScrollY.toString())
-    
+
     router.replace(pathname, { locale: newLocale })
     setIsLangOpen(false)
   }
@@ -142,9 +142,8 @@ export default function Navbar() {
                 {currentLang.name}
               </span>
               <svg
-                className={`w-4 h-4 text-gray-500 transition-transform ${
-                  isLangOpen ? "rotate-180" : ""
-                }`}
+                className={`w-4 h-4 text-gray-500 transition-transform ${isLangOpen ? "rotate-180" : ""
+                  }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -208,7 +207,7 @@ export default function Navbar() {
               )}
             </AnimatePresence>
           </div>
-        </div>        
+        </div>
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-2">
           {/* Language Selector - Mobile */}
@@ -220,9 +219,8 @@ export default function Navbar() {
               <Globe className="w-4 h-4 text-[#439b83]" />
               <span className="font-medium text-gray-700">{currentLang.flag}</span>
               <svg
-                className={`w-4 h-4 text-gray-500 transition-transform ${
-                  isLangOpen ? "rotate-180" : ""
-                }`}
+                className={`w-4 h-4 text-gray-500 transition-transform ${isLangOpen ? "rotate-180" : ""
+                  }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

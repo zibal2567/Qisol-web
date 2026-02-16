@@ -2,11 +2,22 @@
   "navbar": {
     "logo": "QiSol",
     "links": [
-      { "href": "/", "label": "หน้าหลัก" },
-      { "href": "/products", "label": "ผลิตภัณฑ์" },
-      { "href": "/reviews", "label": "รีวิวจากผู้ใช้จริง" },
-      { "href": "/about", "label": "เกี่ยวกับเรา" },
-      { "href": "/contact", "label": "ติดต่อเรา" }
+      {
+        "href": "/",
+        "label": "หน้าหลัก"
+      },
+      {
+        "href": "/products",
+        "label": "ผลิตภัณฑ์"
+      },
+      {
+        "href": "/rewards",
+        "label": "รางวัล"
+      },
+      {
+        "href": "/contact",
+        "label": "ติดต่อเรา"
+      }
     ],
     "secondary": {
       "product": "ผลิตภัณฑ์",

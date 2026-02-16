@@ -1,7 +1,7 @@
-import { getRequestConfig} from 'next-intl/server';
+import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 
-export default getRequestConfig(async ({requestLocale}) => {
+export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment
   let locale = await requestLocale;
 
@@ -17,10 +17,12 @@ export default getRequestConfig(async ({requestLocale}) => {
       ...(await import(`./messages/${locale}/common.json`)).default,
       // Home page messages
       home: (await import(`./messages/${locale}/home.json`)).default,
-      // Reviews page messages
-      reviews: (await import(`./messages/${locale}/reviews.json`)).default,
       // Privacy page messages
-      privacy: (await import(`./messages/${locale}/privacy.json`)).default
+      privacy: (await import(`./messages/${locale}/privacy.json`)).default,
+      // Rewards page messages
+      rewards: (await import(`./messages/${locale}/rewards.json`)).default,
+      // Products page messages
+      products: (await import(`./messages/${locale}/products.json`)).default,
     }
   };
 });

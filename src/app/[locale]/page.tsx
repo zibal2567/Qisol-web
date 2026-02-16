@@ -3,10 +3,7 @@
 import { useEffect, useState, use } from "react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
-import Navbar from "@/components/Navbar";
 import SecondaryNavbar from "@/components/SecondaryNavbar";
-import Footer from "@/components/Footer";
-import CookieConsent from "@/components/CookieConsent";
 import { ChevronUp } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
 import { trackPageView } from "@/lib/analytics";
@@ -17,7 +14,6 @@ const ProductSection = dynamic(() => import("@/components/ProductSection"), { ss
 const BenefitsSection = dynamic(() => import("@/components/BenefitsSection"), { ssr: false });
 const TechnologySection = dynamic(() => import("@/components/TechnologySection"), { ssr: false });
 const ResearchSection = dynamic(() => import("@/components/ResearchSection"), { ssr: false });
-const ContactSection = dynamic(() => import("@/components/ContactSection"), { ssr: false });
 
 interface HomeProps {
   params: Promise<{ locale: string }>;
@@ -31,7 +27,7 @@ const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
 
 export default function Home({ params }: HomeProps) {
   const pathname = usePathname();
-  
+
   const [mounted, setMounted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(false);
@@ -189,7 +185,9 @@ export default function Home({ params }: HomeProps) {
         <LoadingScreen />
       ) : (
         <>
-          <Navbar />
+          {/* 
+            Navbar, Footer, and CookieConsent are now in layout.tsx 
+          */}
           <SecondaryNavbar />
           <main className="relative min-h-screen">
             <HeroSection />
@@ -197,7 +195,6 @@ export default function Home({ params }: HomeProps) {
             <BenefitsSection />
             <TechnologySection />
             <ResearchSection />
-            <ContactSection />
 
             {/* Scroll-to-Top Button */}
             <button
@@ -236,10 +233,6 @@ export default function Home({ params }: HomeProps) {
               </span>
             </button>
           </main>
-          <Footer />
-
-          {/* Cookie Consent Banner */}
-          <CookieConsent locale={currentLocale} />
         </>
       )}
     </>

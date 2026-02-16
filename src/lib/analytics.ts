@@ -48,7 +48,7 @@ import { hasAnalyticsConsent } from './cookies';
  */
 export const trackPageView = (params: PageViewParams) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'page_view', {
       page_title: params.page_title,
@@ -65,7 +65,7 @@ export const trackPageView = (params: PageViewParams) => {
  */
 export const trackSectionView = (params: SectionViewParams) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'section_view', {
       section_name: params.section_name,
@@ -82,7 +82,7 @@ export const trackSectionView = (params: SectionViewParams) => {
  */
 export const trackScrollDepth = (params: ScrollDepthParams) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'scroll', {
       page_path: params.page_path,
@@ -98,7 +98,7 @@ export const trackScrollDepth = (params: ScrollDepthParams) => {
  */
 export const trackButtonClick = (params: ButtonClickParams) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'button_click', {
       button_name: params.button_name,
@@ -115,7 +115,7 @@ export const trackButtonClick = (params: ButtonClickParams) => {
  */
 export const trackFormSubmit = (params: FormSubmitParams) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'form_submit', {
       form_name: params.form_name,
@@ -132,7 +132,7 @@ export const trackFormSubmit = (params: FormSubmitParams) => {
  */
 export const trackLanguageChange = (from: string, to: string) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'language_change', {
       from_language: from,
@@ -149,7 +149,7 @@ export const trackLanguageChange = (from: string, to: string) => {
  */
 export const trackOutboundLink = (url: string, linkText: string) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'click', {
       event_category: 'outbound',
@@ -167,7 +167,7 @@ export const trackOutboundLink = (url: string, linkText: string) => {
  */
 export const trackFileDownload = (fileName: string, fileType: string) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'file_download', {
       file_name: fileName,
@@ -184,7 +184,7 @@ export const trackFileDownload = (fileName: string, fileType: string) => {
  */
 export const trackVideoPlay = (videoName: string, videoUrl: string) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'video_start', {
       video_title: videoName,
@@ -200,7 +200,7 @@ export const trackVideoPlay = (videoName: string, videoUrl: string) => {
  */
 export const trackSearch = (searchTerm: string) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'search', {
       search_term: searchTerm,
@@ -215,7 +215,7 @@ export const trackSearch = (searchTerm: string) => {
  */
 export const trackTimeOnPage = (timeInSeconds: number) => {
   if (!hasAnalyticsConsent()) return; // ✅ เช็ค Consent ก่อน
-  
+
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'time_on_page', {
       value: timeInSeconds,

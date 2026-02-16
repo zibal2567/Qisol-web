@@ -1,0 +1,22 @@
+{
+    "title": "Awards & Achievements",
+    "subtitle": "Our pride in developing medical innovations at national and international levels",
+    "items": {
+        "01": {
+            "title": "EMC GLOBAL SUMMIT & Business BootCamp 2026",
+            "description": "Held in Japan - An international stage gathering business leaders, investors, and entrepreneurs from around the world to exchange knowledge, build networks, and expand into global markets."
+        },
+        "02": {
+            "title": "2026 IPITEx International Special Prize (IPITEx 2026)",
+            "description": "Received Gold Medal and Diploma Grand Prize from EUROINVENT"
+        },
+        "03": {
+            "title": "Experiential Learning Program 2025 (ELP#3)",
+            "description": "Selected as Thailand's representative for Startup Business exchange program, winning 1st Prize in Presentation and joining EMC GLOBAL SUMMIT & Business BootCamp 2026"
+        },
+        "04": {
+            "title": "Best Research Award",
+            "description": "Published in leading international medical journals and recognized by global experts"
+        }
+    }
+}

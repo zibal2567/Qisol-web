@@ -1,8 +1,11 @@
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
-import {notFound} from 'next/navigation';
-import {routing} from '@/i18n/routing';
-import type {Metadata} from 'next';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import type { Metadata } from 'next';
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 // Metadata สำหรับแต่ละภาษา
 const metadataByLocale: Record<string, Metadata> = {
@@ -116,7 +119,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  
+
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as 'th' | 'en' | 'ja')) {
     notFound();
@@ -125,9 +128,24 @@ export default async function LocaleLayout({
   // Providing all messages to the client side
   const messages = await getMessages();
 
+  // Map short locale to long format for CookieConsent
+  const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
+    'th': 'th-TH',
+    'en': 'en-US',
+    'ja': 'ja-JP'
+  };
+  const cookieLocale = localeMap[locale] || 'th-TH';
+
   return (
     <NextIntlClientProvider messages={messages}>
-      {children}
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <div className="flex-grow">
+          {children}
+        </div>
+        <Footer />
+        <CookieConsent locale={cookieLocale} />
+      </div>
     </NextIntlClientProvider>
   );
 }

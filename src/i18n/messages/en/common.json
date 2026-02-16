@@ -2,11 +2,22 @@
   "navbar": {
     "logo": "QiSol",
     "links": [
-      { "href": "/", "label": "Home" },
-      { "href": "/products", "label": "Products" },
-      { "href": "/reviews", "label": "Reviews" },
-      { "href": "/about", "label": "About" },
-      { "href": "/contact", "label": "Contact" }
+      {
+        "href": "/",
+        "label": "Home"
+      },
+      {
+        "href": "/products",
+        "label": "Products"
+      },
+      {
+        "href": "/rewards",
+        "label": "Awards"
+      },
+      {
+        "href": "/contact",
+        "label": "Contact"
+      }
     ],
     "secondary": {
       "product": "Product",

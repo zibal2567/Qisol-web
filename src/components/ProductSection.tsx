@@ -8,12 +8,13 @@ import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { trackButtonClick } from '@/lib/analytics';
+import { ImageZoom } from '@/components/ui/ImageZoom';
 
 const ProductSection = memo(function ProductSection() {
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations('home');
-  
+
   const product = t.raw('product') as { title: string; description: string };
   const features = t.raw('features') as { title: string; items: string[] };
 
@@ -43,33 +44,50 @@ const ProductSection = memo(function ProductSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Product Visual */}
           <motion.div
-            className="flex justify-center lg:justify-center"
-            initial={{ opacity: 0, x: -100 }}    // ซ้าย
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            className="relative lg:w-full flex justify-center items-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative">
-              <div className="w-60 h-60 sm:w-80 sm:h-80 bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] rounded-3xl flex items-center justify-center shadow-2xl">
-                {/* Product Image */}
+            <div className="relative w-full max-w-[500px] lg:max-w-none">
+              <div className="absolute inset-0 bg-[#439b83]/10 rounded-full blur-[60px] -z-10 scale-125" />
+
+              <ImageZoom
+                className="w-full relative z-10"
+                zoomImg={{
+                  src: "/Image/Product.png",
+                  alt: "QiSol Product"
+                }}
+              >
                 <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ repeat: Infinity, duration: 4 }}
-                  className="absolute -top-5 sm:-top-12 left-1/2 -translate-x-1/2 w-72 h-72 sm:w-[420px] sm:h-[420px]"
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative w-full aspect-square"
                 >
-                    <Image
-                      src="/Image/Product.png"
-                      alt="QiSol Product"
-                      fill
-                      className="object-contain drop-shadow-2xl"
-                      priority
-                    />
+                  <Image
+                    src="/Image/Product.png"
+                    alt="QiSol Product"
+                    fill
+                    className="object-contain drop-shadow-[0_8px_18px_rgba(67,155,131,0.12)]"
+                    priority
+                  />
                 </motion.div>
-              </div>
-              <div className="absolute -top-6 -right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg cursor-pointer hover:bg-green-600 transition-colors" onClick={handlePatentClick}>
+              </ImageZoom>
+
+              {/* IP Badge */}
+              <div
+                className="absolute -top-10 -right-4 bg-green-500 text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-md cursor-pointer hover:bg-green-600 transition-all hover:scale-105 z-20 whitespace-nowrap"
+                onClick={handlePatentClick}
+              >
                 IP Number: 2503000774
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg cursor-pointer hover:bg-green-700 transition-colors" onClick={handlePatentClick}>
+
+              {/* Botanical Badge */}
+              <div
+                className="absolute -bottom-4 -left-4 bg-green-600 text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-md cursor-pointer hover:bg-green-700 transition-all hover:scale-105 z-20 whitespace-nowrap"
+                onClick={handlePatentClick}
+              >
                 Quercus infectoria
               </div>
             </div>

@@ -2,11 +2,22 @@
   "navbar": {
     "logo": "QiSol",
     "links": [
-      { "href": "/", "label": "ホーム" },
-      { "href": "/products", "label": "製品" },
-      { "href": "/reviews", "label": "レビュー" },
-      { "href": "/about", "label": "会社概要" },
-      { "href": "/contact", "label": "お問い合わせ" }
+      {
+        "href": "/",
+        "label": "ホーム"
+      },
+      {
+        "href": "/products",
+        "label": "製品"
+      },
+      {
+        "href": "/rewards",
+        "label": "受賞歴"
+      },
+      {
+        "href": "/contact",
+        "label": "お問い合わせ"
+      }
     ],
     "secondary": {
       "product": "製品",

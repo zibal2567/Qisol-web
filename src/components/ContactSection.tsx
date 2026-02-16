@@ -13,7 +13,7 @@ const ContactSection = memo(function ContactSection() {
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'th';
   const t = useTranslations('contact');
-  
+
   // Track section view
   const sectionRef = useSectionTracking({
     sectionName: 'Contact Section',
@@ -28,7 +28,7 @@ const ContactSection = memo(function ContactSection() {
       page_path: pathname,
       language: locale
     });
-    
+
     // Open email/phone/social
     if (contactType === 'Email') {
       window.location.href = `mailto:${value}`;
@@ -43,7 +43,7 @@ const ContactSection = memo(function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-20 bg-gradient-to-br from-gray-100 via-slate-50 to-emerald-50"
+      className='relative'
     >
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -53,7 +53,7 @@ const ContactSection = memo(function ContactSection() {
             <span className="text-sm font-medium text-gray-700">{t('badge')}</span>
           </div>
         </div>
-        <h1 className="text-6xl font-extrabold tracking-tight bg-gradient-to-r from-green-950 via-[#439b83] to-[#439b83] bg-clip-text text-transparent px-5 pb-10 text-center">
+        <h1 className="text-6xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-50 to-emerald-50 bg-clip-text text-transparent px-5 pb-10 text-center">
           {t('title')}
         </h1>
 
@@ -114,21 +114,21 @@ const ContactSection = memo(function ContactSection() {
               {/* Contact */}
               <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800 p-8 rounded-3xl text-white shadow-2xl space-y-4">
                 <h3 className="text-2xl font-bold mb-6">{t('contactCard.title')}</h3>
-                <div 
+                <div
                   className="flex items-center gap-4 cursor-pointer hover:text-emerald-300 transition-colors"
                   onClick={() => handleContactClick('Phone', '0611830764')}
                 >
                   <Phone className="w-6 h-6 text-emerald-300" />
                   <span>0611830764</span>
                 </div>
-                <div 
+                <div
                   className="flex items-center gap-4 cursor-pointer hover:text-emerald-300 transition-colors"
                   onClick={() => handleContactClick('Email', 'mr.niaffan.muha@gmail.com')}
                 >
                   <Mail className="w-6 h-6 text-emerald-300" />
                   <span>mr.niaffan.muha@gmail.com</span>
                 </div>
-                <div 
+                <div
                   className="flex items-center gap-4 cursor-pointer hover:text-emerald-300 transition-colors"
                   onClick={() => handleContactClick('LinkedIn', 'https://www.linkedin.com/in/niaffan-muha')}
                 >

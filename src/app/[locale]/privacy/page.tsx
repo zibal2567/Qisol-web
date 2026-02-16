@@ -1,8 +1,6 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Shield, Lock, Eye, UserCheck, FileText, LucideIcon } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -25,8 +23,7 @@ export default function PrivacyPage() {
 
   return (
     <>
-      <Navbar />
-      
+
       <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 pt-24 pb-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
@@ -89,7 +86,6 @@ export default function PrivacyPage() {
         </div>
       </main>
 
-      <Footer />
     </>
   );
 }

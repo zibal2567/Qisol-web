@@ -10,11 +10,10 @@ export default function SecondaryNavbar() {
   const t = useTranslations()
 
   const sections = useMemo(() => [
-    { id: "product", label: t('navbar.secondary.product')},
-    { id: "benefits", label: t('navbar.secondary.benefits')},
-    { id: "technology", label: t('navbar.secondary.technology')},
-    { id: "research", label: t('navbar.secondary.research')},
-    { id: "contact", label: t('navbar.secondary.contact')},
+    { id: "product", label: t('navbar.secondary.product') },
+    { id: "benefits", label: t('navbar.secondary.benefits') },
+    { id: "technology", label: t('navbar.secondary.technology') },
+    { id: "research", label: t('navbar.secondary.research') },
   ], [t])
 
   // แสดง navbar เมื่อเลื่อนลงมา
