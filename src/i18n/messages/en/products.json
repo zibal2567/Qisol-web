@@ -1,0 +1,54 @@
+{
+    "title": "Our Products",
+    "subtitle": "Innovative Dissolvable Hydrogel Wound Dressing with Quercus Infectoria Extract",
+    "hero": {
+        "badge": "Latest Medical Innovation",
+        "title": "QiSol Hydrogel Film",
+        "description": "Revolutionary wound dressing film that dissolves into the wound, reducing pain during dressing changes and accelerating healing.",
+        "cta": "Order Now"
+    },
+    "main": {
+        "title": "Superior Features",
+        "description": "QiSol is designed to solve traditional wound care problems, especially for chronic wounds, diabetic ulcers, and pressure sores.",
+        "features": {
+            "dissolvable": {
+                "title": "Dissolvable",
+                "desc": "No removal needed, no pain, prevents damage to newly formed tissue."
+            },
+            "healing": {
+                "title": "Fast Healing",
+                "desc": "Stimulates cell regeneration, accelerating healing up to 3 times faster."
+            },
+            "antimicrobial": {
+                "title": "Antimicrobial",
+                "desc": "Inhibits bacteria and fungi, significantly reducing infection risks."
+            },
+            "natural": {
+                "title": "Natural Extract",
+                "desc": "Infused with Quercus infectoria extract, safe and free from harmful chemicals."
+            },
+            "safe": {
+                "title": "High Safety",
+                "desc": "Passed irritation and cytotoxicity tests."
+            },
+            "affordable": {
+                "title": "Cost-Effective",
+                "desc": "Reduces overall treatment time and medical expenses."
+            }
+        }
+    },
+    "usage": {
+        "title": "How to Use",
+        "steps": [
+            "Clean the wound with saline solution.",
+            "Apply QiSol film directly onto the wound.",
+            "Cover with gauze or plaster if needed.",
+            "The film will gradually dissolve upon contact with wound exudate."
+        ]
+    },
+    "tech": {
+        "title": "Electrospinning Technology",
+        "description": "Nano-fiber fabrication process creates a highly porous structure allowing gas exchange while blocking bacteria.",
+        "patent": "Petty Patent No. 2503000774"
+    }
+}

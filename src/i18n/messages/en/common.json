@@ -1,0 +1,57 @@
+{
+  "navbar": {
+    "logo": "QiSol",
+    "links": [
+      {
+        "href": "/",
+        "label": "Home"
+      },
+      {
+        "href": "/products",
+        "label": "Products"
+      },
+      {
+        "href": "/rewards",
+        "label": "Awards"
+      },
+      {
+        "href": "/contact",
+        "label": "Contact"
+      }
+    ],
+    "secondary": {
+      "product": "Product",
+      "benefits": "Benefits",
+      "technology": "Technology",
+      "research": "Research",
+      "contact": "Contact"
+    }
+  },
+  "footer": {
+    "contactTitle": "Contact/Order Products",
+    "copyright": "© 2025 Qisol. All rights reserved.",
+    "madeBy": "Made by"
+  },
+  "contact": {
+    "badge": "Our Teams",
+    "title": "Our Teams",
+    "ceo": {
+      "name": "NIAFFAN MUHA",
+      "nickname": "PANG",
+      "position": "CEO"
+    },
+    "cto1": {
+      "name": "Dr. CHANAWEE JAKKAWANPITAK",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "cto2": {
+      "name": "DR. SUTTIWAN WUNNOO",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "contactCard": {
+      "title": "Contact"
+    }
+  }
+}

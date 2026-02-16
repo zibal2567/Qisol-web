@@ -1,8 +1,11 @@
-import { notFound } from 'next/navigation'
-import { use } from 'react'
-import type { Metadata } from 'next'
-
-const locales = ['th', 'en', 'ja']
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import type { Metadata } from 'next';
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 // Metadata สำหรับแต่ละภาษา
 const metadataByLocale: Record<string, Metadata> = {
@@ -105,23 +108,44 @@ export async function generateMetadata({
 }
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }))
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params
 }: {
   children: React.ReactNode
   params: Promise<{ locale: string }>
 }) {
-  // Unwrap params using React.use()
-  const { locale } = use(params)
-  
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale)) {
-    notFound()
+  const { locale } = await params
+
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as 'th' | 'en' | 'ja')) {
+    notFound();
   }
 
-  return children
+  // Providing all messages to the client side
+  const messages = await getMessages();
+
+  // Map short locale to long format for CookieConsent
+  const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
+    'th': 'th-TH',
+    'en': 'en-US',
+    'ja': 'ja-JP'
+  };
+  const cookieLocale = localeMap[locale] || 'th-TH';
+
+  return (
+    <NextIntlClientProvider messages={messages}>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <div className="flex-grow">
+          {children}
+        </div>
+        <Footer />
+        <CookieConsent locale={cookieLocale} />
+      </div>
+    </NextIntlClientProvider>
+  );
 }

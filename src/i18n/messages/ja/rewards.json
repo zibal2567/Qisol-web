@@ -1,0 +1,22 @@
+{
+    "title": "受賞歴と実績",
+    "subtitle": "国内および国際レベルでの医療革新開発における私たちの誇り",
+    "items": {
+        "01": {
+            "title": "EMC GLOBAL SUMMIT & Business BootCamp 2026",
+            "description": "日本で開催 - 世界中のビジネスリーダー、投資家、起業家が集い、知識を共有し、ネットワークを構築し、グローバル市場への拡大を目指す国際的な舞台です。"
+        },
+        "02": {
+            "title": "2026 IPITEx International Special Prize (IPITEx 2026)",
+            "description": "EUROINVENTから金メダルと特別賞状を受賞"
+        },
+        "03": {
+            "title": "Experiential Learning Program 2025 (ELP#3)",
+            "description": "スタートアップビジネス交換プログラムのタイ代表として選出され、プレゼンテーション部門で1位を獲得し、EMC GLOBAL SUMMIT & Business BootCamp 2026に参加"
+        },
+        "04": {
+            "title": "最優秀研究賞",
+            "description": "主要な国際医学ジャーナルに掲載され、世界中の専門家から認められました"
+        }
+    }
+}

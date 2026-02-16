@@ -1,0 +1,117 @@
+{
+  "hero": {
+    "title": "QiSol",
+    "subtitle": "Advanced Dissolving Wound Healing Film Infused with botanical extract from Quercus infectoria",
+    "cta": "Contact Research Team"
+  },
+  "product": {
+    "title": "QiSol Film",
+    "description": "Unlike conventional wound dressings, QiSol does not need removal, reduces re-injury, affordable and ideal for diabetic & pressure ulcers."
+  },
+  "features": {
+    "title": "Key Highlights",
+    "items": [
+      "Self-dissolving film, no painful removal",
+      "Accelerates wound healing, promotes new cell growth",
+      "Broad-spectrum antibacterial & antifungal protection",
+      "Quercus infectoria extract: anti-inflammatory, antioxidant, hemostatic",
+      "No risk of antibiotic resistance",
+      "Easy to use, affordable, portable"
+    ]
+  },
+  "benefits": {
+    "title": "Why QiSol?",
+    "desc": "Advanced dissolving wound healing film infused with botanical extract from Quercus infectoria",
+    "metrics": [
+      {
+        "value": "99.9%",
+        "label": "Bacteria Protection",
+        "detail": "Effectively reduces the risk of bacterial infection"
+      },
+      {
+        "value": "3×",
+        "label": "Faster Healing",
+        "detail": "Three times faster than traditional methods, greatly reducing recovery time"
+      },
+      {
+        "value": "40%",
+        "label": "Cost Reduction",
+        "detail": "Cuts treatment and healthcare costs by up to 40%"
+      }
+    ]
+  },
+  "technology": {
+    "title": "Core Technologies",
+    "desc": "Explore the cutting-edge technology behind the development of QI-SOL Hydrogel Film",
+    "items": [
+      {
+        "title": "Dissolvable Hydrogel Film",
+        "desc": "Explore the cutting-edge technology behind the development of QI-SOL Hydrogel Film"
+      },
+      {
+        "title": "Quercus infectoria Extract",
+        "desc": "Rich in flavonoids and phenolic compounds with anti-inflammatory and regenerative effects"
+      }
+    ],
+    "process": {
+      "title": "Production process",
+      "icon": "Settings",
+      "content": [
+        {
+          "title": "Dissolvable Hydrogel Film",
+          "desc": "Dissolves in wound exudate, no painful removal required"
+        },
+        {
+          "title": "Quercus infectoria Extract",
+          "desc": "Rich in flavonoids and phenolic compounds with anti-inflammatory and tissue-regenerative properties"
+        }
+      ]
+    },
+    "materials": {
+      "title": "Material Process",
+      "icon": "Beaker",
+      "content": [
+        {
+          "title": "Polyvinyl Alcohol (PVA)",
+          "desc": "Primary material for creating dissolvable hydrogel fibers that dissolve in water"
+        },
+        {
+          "title": "Quercus infectoria Extract",
+          "desc": "Natural compound with anti-inflammatory properties that aids in tissue repair"
+        }
+      ]
+    }
+  },
+  "research": {
+    "title": "Research & Patent Information",
+    "description": "Advanced research and development using cutting-edge technology to create safe and effective medical innovations",
+    "details": [
+      "TRL Level 4",
+      "Patent application no. 2503000774",
+      "Electrospinning with Polyvinyl alcohol"
+    ],
+    "overview": {
+      "title": "Development of Hydrogel Films for Wound Treatment",
+      "description": "Medical innovation using Electrospinning technology to create thin films that can effectively assist in wound healing",
+      "stats": [
+        { "label": "Efficacy", "value": "95%", "color": "emerald" },
+        { "label": "Safety", "value": "100%", "color": "blue" },
+        { "label": "Satisfaction", "value": "98%", "color": "purple" }
+      ]
+    },
+    "methodology": {
+      "title": "Manufacturing and Testing Process",
+      "description": "Using Electrospinning technique combined with Polyvinyl alcohol to create films with special properties",
+      "methods": [
+        { "step": "01", "title": "Solution Preparation", "desc": "Mix PVA with additives for optimal properties" },
+        { "step": "02", "title": "Electrospinning Process", "desc": "Create nanofibers through electrical process" },
+        { "step": "03", "title": "Property Testing", "desc": "Test strength and biodegradation properties" },
+        { "step": "04", "title": "Performance Evaluation", "desc": "Real-world testing with various wound types" }
+      ]
+    }
+  },
+  "cta": {
+    "text": "Interested in partnership or research?",
+    "button": "Contact Us"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "navbar": {
+    "logo": "QiSol",
+    "links": [
+      {
+        "href": "/",
+        "label": "หน้าหลัก"
+      },
+      {
+        "href": "/products",
+        "label": "ผลิตภัณฑ์"
+      },
+      {
+        "href": "/rewards",
+        "label": "รางวัล"
+      },
+      {
+        "href": "/contact",
+        "label": "ติดต่อเรา"
+      }
+    ],
+    "secondary": {
+      "product": "ผลิตภัณฑ์",
+      "benefits": "ประโยชน์",
+      "technology": "เทคโนโลยี",
+      "research": "วิจัย",
+      "contact": "ติดต่อ"
+    }
+  },
+  "footer": {
+    "contactTitle": "ติดต่อ/สั่งซื้อผลิตภัณฑ์",
+    "copyright": "© 2025 Qisol. สงวนลิขสิทธิ์.",
+    "madeBy": "สร้างโดย"
+  },
+  "contact": {
+    "badge": "ทีมของเรา",
+    "title": "ทีมของเรา",
+    "ceo": {
+      "name": "NIAFFAN MUHA",
+      "nickname": "PANG",
+      "position": "CEO"
+    },
+    "cto1": {
+      "name": "Dr. CHANAWEE JAKKAWANPITAK",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "cto2": {
+      "name": "DR. SUTTIWAN WUNNOO",
+      "position": "CTO",
+      "affiliation": "CENTER OF ANTIMICROBIAL BIOMATERIAL INNOVATION-SOUTHEAST ASIA, FACULTY OF SCIENCE, PRINCE OF SONGKLA UNIVERSITY"
+    },
+    "contactCard": {
+      "title": "ติดต่อ"
+    }
+  }
+}
