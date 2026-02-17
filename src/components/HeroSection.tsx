@@ -71,7 +71,7 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-20">
           {/* Text Content */}
           <div className="relative text-center lg:text-left">
             <div className="absolute -top-6 sm:-top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-90">
@@ -109,7 +109,7 @@ export default function HeroSection() {
             </div>
 
             {/* รูปสินค้า */}
-            <div className="absolute sm:left-57 sm:-top-32 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-128 sm:h-128">
+            <div className="absolute sm:left-57 sm:-top-32 -top-25 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-128 sm:h-128">
               <ImageZoom>
                 <Image
                   alt="QI-SOL Product"
