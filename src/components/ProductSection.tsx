@@ -17,6 +17,10 @@ const ProductSection = memo(function ProductSection() {
 
   const product = t.raw('product') as { title: string; description: string };
   const features = t.raw('features') as { title: string; items: string[] };
+  const badges = t.raw('badges') as {
+    patent: { label: string; value: string };
+    botanical: { label: string; value: string };
+  };
 
   // Track section view
   const sectionRef = useSectionTracking({
@@ -51,7 +55,7 @@ const ProductSection = memo(function ProductSection() {
             transition={{ duration: 0.8 }}
           >
             <div className="relative w-full max-w-[500px] lg:max-w-none">
-              <div className="absolute inset-0 bg-[#439b83]/10 rounded-full blur-[60px] -z-10 scale-125" />
+              <div className="absolute inset-0 bg-[#439b83]/10 rounded-full blur-[60px] -z-10" />
 
               <ImageZoom
                 className="w-full relative z-10"
@@ -69,27 +73,76 @@ const ProductSection = memo(function ProductSection() {
                     src="/Image/Product.png"
                     alt="QiSol Product"
                     fill
-                    className="object-contain drop-shadow-[0_8px_18px_rgba(67,155,131,0.12)]"
+                    className="object-contain drop-shadow-[0_20px_50px_rgba(67,155,131,0.2)]"
                     priority
                   />
                 </motion.div>
               </ImageZoom>
 
               {/* IP Badge */}
-              <div
-                className="absolute -top-10 -right-4 bg-green-500 text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-md cursor-pointer hover:bg-green-600 transition-all hover:scale-105 z-20 whitespace-nowrap"
-                onClick={handlePatentClick}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                viewport={{ once: true }}
+                className="absolute -top-6 -right-4 lg:-right-8 z-20 group"
               >
-                IP Number: 2503000774
-              </div>
+                <div
+                  className="flex items-center gap-3 bg-white/80 backdrop-blur-md border border-white/40 p-3 rounded-2xl shadow-xl cursor-pointer hover:bg-white transition-all duration-300 "
+                  onClick={handlePatentClick}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-white shadow-lg transition-transform duration-300">
+                    <CheckCircle size={22} strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-green-700 uppercase tracking-wider leading-none mb-1">
+                      {badges.patent.label}
+                    </p>
+                    <p className="text-sm font-bold text-gray-800 tabular-nums">
+                      {badges.patent.value}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
 
               {/* Botanical Badge */}
-              <div
-                className="absolute -bottom-4 -left-4 bg-green-600 text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-md cursor-pointer hover:bg-green-700 transition-all hover:scale-105 z-20 whitespace-nowrap"
-                onClick={handlePatentClick}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.8 }}
+                viewport={{ once: true }}
+                className="absolute -bottom-6 -left-4 lg:-left-8 z-20 group"
               >
-                Quercus infectoria
-              </div>
+                <div
+                  className="flex items-center gap-3 bg-white/80 backdrop-blur-md border border-white/40 p-3 rounded-2xl shadow-xl cursor-pointer hover:bg-white transition-all duration-300"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white shadow-lg transition-transform duration-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-leaf"
+                    >
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider leading-none mb-1">
+                      {badges.botanical.label}
+                    </p>
+                    <p className="text-sm font-bold text-gray-800">
+                      {badges.botanical.value}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 
