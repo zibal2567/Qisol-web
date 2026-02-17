@@ -5,10 +5,8 @@ import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import SecondaryNavbar from "@/components/SecondaryNavbar";
 import { ChevronUp } from "lucide-react";
-import LoadingScreen from "@/components/LoadingScreen";
 import { trackPageView } from "@/lib/analytics";
 import { useScrollDepthTracking, useTimeTracking } from "@/hooks/useScrollTracking";
-import { AnimatePresence } from "framer-motion";
 
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { ssr: false });
 const ProductSection = dynamic(() => import("@/components/ProductSection"), { ssr: false });
@@ -165,20 +163,8 @@ export default function Home({ params }: HomeProps) {
     }
   };
 
-  const [isLoading, setIsLoading] = useState(!hasMountedBefore);
-
-  useEffect(() => {
-    if (mounted) {
-      const timer = setTimeout(() => setIsLoading(false), 500);
-      return () => clearTimeout(timer);
-    }
-  }, [mounted]);
-
   return (
     <>
-      <AnimatePresence>
-        {isLoading && <LoadingScreen key="loader" />}
-      </AnimatePresence>
 
       <script
         type="application/ld+json"
