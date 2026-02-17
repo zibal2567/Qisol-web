@@ -8,6 +8,7 @@ import { ChevronUp } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
 import { trackPageView } from "@/lib/analytics";
 import { useScrollDepthTracking, useTimeTracking } from "@/hooks/useScrollTracking";
+import { AnimatePresence } from "framer-motion";
 
 const HeroSection = dynamic(() => import("@/components/HeroSection"), { ssr: false });
 const ProductSection = dynamic(() => import("@/components/ProductSection"), { ssr: false });
@@ -25,10 +26,12 @@ const localeMap: Record<string, "th-TH" | "en-US" | "ja-JP"> = {
   'ja': 'ja-JP'
 }
 
+let hasMountedBefore = false;
+
 export default function Home({ params }: HomeProps) {
   const pathname = usePathname();
 
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(hasMountedBefore);
   const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(false);
 
@@ -42,6 +45,7 @@ export default function Home({ params }: HomeProps) {
 
   useEffect(() => {
     setMounted(true);
+    hasMountedBefore = true;
 
     if (typeof window !== 'undefined') {
       trackPageView({
@@ -161,80 +165,76 @@ export default function Home({ params }: HomeProps) {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(!hasMountedBefore);
+
+  useEffect(() => {
+    if (mounted) {
+      const timer = setTimeout(() => setIsLoading(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [mounted]);
+
   return (
     <>
-      {/* Structured Data for SEO - Organization */}
+      <AnimatePresence>
+        {isLoading && <LoadingScreen key="loader" />}
+      </AnimatePresence>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
       />
-
-      {/* Structured Data for SEO - Medical Business */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalBusinessData) }}
       />
-
-      {/* Structured Data for SEO - Website */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
       />
 
-      {!mounted ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          {/* 
-            Navbar, Footer, and CookieConsent are now in layout.tsx 
-          */}
-          <SecondaryNavbar />
-          <main className="relative min-h-screen">
-            <HeroSection />
-            <ProductSection />
-            <BenefitsSection />
-            <TechnologySection />
-            <ResearchSection />
+      <SecondaryNavbar />
+      <main className="relative min-h-screen">
+        <HeroSection />
+        <ProductSection />
+        <BenefitsSection />
+        <TechnologySection />
+        <ResearchSection />
 
-            {/* Scroll-to-Top Button */}
-            <button
-              aria-label="Back to top"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className={`cursor-pointer fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 
-                    transition-all duration-300 
-                    ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
-            >
-              <span className="relative grid place-items-center w-14 h-14 rounded-full bg-white/80 backdrop-blur-md shadow-lg ring-1 ring-[#2d5e53] hover:shadow-xl">
-                {/* วงแหวน progress */}
-                <svg className="absolute inset-0 -rotate-90" width="56" height="56">
-                  <circle cx="28" cy="28" r={radius} stroke="#e2e8f0" strokeWidth="4" fill="none" />
-                  <circle
-                    cx="28"
-                    cy="28"
-                    r={radius}
-                    stroke="url(#gradientStroke)"
-                    strokeWidth="4"
-                    fill="none"
-                    strokeDasharray={circumference}
-                    strokeDashoffset={dashoffset}
-                    strokeLinecap="round"
-                    style={{ transition: 'stroke-dashoffset 120ms linear' }}
-                  />
-                  {/* bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53] */}
-                  <defs>
-                    <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#439b83" /> {/* sky-400 */}
-                      <stop offset="100%" stopColor="#367268" /> {/* sky-600 */}
-                    </linearGradient>
-                  </defs>
-                </svg>
-
-                <ChevronUp className="w-6 h-6 text-[#2d5e53] relative z-10" />
-              </span>
-            </button>
-          </main>
-        </>
-      )}
+        {/* Scroll-to-Top Button */}
+        <button
+          aria-label="Back to top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className={`cursor-pointer fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 
+                transition-all duration-300 
+                ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
+        >
+          <span className="relative grid place-items-center w-14 h-14 rounded-full bg-white/80 backdrop-blur-md shadow-lg ring-1 ring-[#2d5e53] hover:shadow-xl">
+            <svg className="absolute inset-0 -rotate-90" width="56" height="56">
+              <circle cx="28" cy="28" r={radius} stroke="#e2e8f0" strokeWidth="4" fill="none" />
+              <circle
+                cx="28"
+                cy="28"
+                r={radius}
+                stroke="url(#gradientStroke)"
+                strokeWidth="4"
+                fill="none"
+                strokeDasharray={circumference}
+                strokeDashoffset={dashoffset}
+                strokeLinecap="round"
+                style={{ transition: 'stroke-dashoffset 120ms linear' }}
+              />
+              <defs>
+                <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#439b83" />
+                  <stop offset="100%" stopColor="#367268" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <ChevronUp className="w-6 h-6 text-[#2d5e53] relative z-10" />
+          </span>
+        </button>
+      </main>
     </>
   );
 }

@@ -1,5 +1,5 @@
 export const contectConfig = {
-  tel: '+66 061-1830764',
+  tel: '061-1830764',
   email: 'mr.niaffan.muha@gmail.com',
   facebook: 'Niaffan Muha',
   line: 'niaffan555',

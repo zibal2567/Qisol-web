@@ -28,8 +28,13 @@
     }
   },
   "footer": {
+    "title": "QiSol – Dissolvable hydrogel film with gallnut extract",
+    "subtitle": "Advanced Dissolving Wound Healing Film Infused with botanical extract from Quercus infectoria",
+    "menuTitle": "Main Menu",
     "contactTitle": "Contact/Order Products",
     "copyright": "© 2025 Qisol. All rights reserved.",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
     "madeBy": "Made by"
   },
   "contact": {

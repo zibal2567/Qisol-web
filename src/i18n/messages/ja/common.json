@@ -28,8 +28,13 @@
     }
   },
   "footer": {
+    "title": "QiSol – 溶解性ハイドロゲル創傷治癒フィルム",
+    "subtitle": "溶解性ハイドロゲル創傷治癒フィルム — マンサク抽出物配合で感染を防ぎ、治癒を促進",
+    "menuTitle": "メインメニュー",
     "contactTitle": "お問い合わせ/製品注文",
     "copyright": "© 2025 Qisol. 全著作権所有。",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
     "madeBy": "製作者"
   },
   "contact": {

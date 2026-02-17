@@ -8,8 +8,10 @@ import { motion } from 'framer-motion';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
+let hasMountedBeforeHero = false;
+
 export default function HeroSection() {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(hasMountedBeforeHero);
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations('home.hero');
@@ -39,9 +41,10 @@ export default function HeroSection() {
 
   useEffect(() => {
     setMounted(true);
+    hasMountedBeforeHero = true;
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) return <div className="min-h-screen bg-[#439b83]" />; // Placeholder with height
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53]">
