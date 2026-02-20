@@ -77,7 +77,7 @@ export default function HeroSection() {
             <div className="absolute -top-6 sm:-top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-90">
               <Image
                 src="/Image/LOGO.png"
-                alt="QiSol Logo"
+                alt="QiSol"
                 width={726}
                 height={204}
                 className="w-48 sm:w-72 lg:w-96 h-auto drop-shadow-lg"
