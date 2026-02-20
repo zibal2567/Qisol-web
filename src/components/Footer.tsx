@@ -74,28 +74,28 @@ export default function Footer() {
                                           <div className="flex items-center justify-center md:justify-start gap-4">
                                                 <Phone className="w-5 h-5 flex-shrink-0 text-white" />
                                                 <a href={`tel:${contectConfig.tel}`} className="hover:text-white transition-colors">
-                                                      Call Center : {contectConfig.tel}
+                                                      {contectConfig.tel}
                                                 </a>
                                           </div>
 
                                           <div className="flex items-center justify-center md:justify-start gap-4">
                                                 <Mail className="w-5 h-5 flex-shrink-0 text-white" />
                                                 <a href={`mailto:${contectConfig.email}`} className="hover:text-white transition-colors">
-                                                      Email : {contectConfig.email}
+                                                      {contectConfig.email}
                                                 </a>
                                           </div>
 
                                           <div className="flex items-center justify-center md:justify-start gap-4">
                                                 <Facebook className="w-5 h-5 flex-shrink-0 text-white" />
                                                 <a href="https://facebook.com/affan.muha" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                                                      Facebook : {contectConfig.facebook}
+                                                      {contectConfig.facebook}
                                                 </a>
                                           </div>
 
                                           <div className="flex items-center justify-center md:justify-start gap-4">
                                                 <LineIcon className="w-5 h-5 flex-shrink-0 text-white" />
                                                 <a href={`https://line.me/ti/p/${contectConfig.line}`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                                                      Line : @{contectConfig.line}
+                                                      @{contectConfig.line}
                                                 </a>
                                           </div>
 
