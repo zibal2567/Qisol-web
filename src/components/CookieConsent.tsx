@@ -25,7 +25,6 @@ const translations = {
             savePreferences: "บันทึกการตั้งค่า",
             privacyPolicy: "นโยบายความเป็นส่วนตัว",
             learnMore: "เรียนรู้เพิ่มเติม",
-            cookieSettings: "ตั้งค่าคุกกี้",
       },
       "en-US": {
             title: "🍪 Cookie & Privacy Policy",
@@ -42,7 +41,6 @@ const translations = {
             savePreferences: "Save Preferences",
             privacyPolicy: "Privacy Policy",
             learnMore: "Learn More",
-            cookieSettings: "Cookie Settings",
       },
       "ja-JP": {
             title: "🍪 クッキーとプライバシーポリシー",
@@ -59,7 +57,6 @@ const translations = {
             savePreferences: "設定を保存",
             privacyPolicy: "プライバシーポリシー",
             learnMore: "詳細を見る",
-            cookieSettings: "Cookie設定",
       },
 };
 
@@ -378,22 +375,17 @@ export default function CookieConsent({ locale }: CookieConsentProps) {
                         {showFloatingButton && !showBanner && !showSettings && (
                               <motion.button
                                     onClick={() => setShowSettings(true)}
-                                    className="cursor-pointer fixed bottom-6 left-6 z-[9998] bg-white hover:bg-gray-50 text-gray-700 px-4 py-3 rounded-full shadow-lg border-2 border-[#439b83]/20 hover:border-[#439b83] transition-all duration-200 flex items-center gap-2 group"
+                                    className="cursor-pointer fixed bottom-6 left-6 z-[9998] bg-white hover:bg-gray-50 text-gray-700 p-2 rounded-full shadow-lg border-2 border-[#439b83]/20 hover:border-[#439b83] transition-all duration-200 flex items-center gap-2 group"
                                     initial={{ x: -100, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     exit={{ x: -100, opacity: 0 }}
                                     transition={{ duration: 0.3, delay: 0.5 }}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    aria-label={t.cookieSettings}
                               >
                                     <div className="w-8 h-8 bg-gradient-to-br from-[#439b83] to-[#367268] rounded-full flex items-center justify-center">
                                           <Cookie className="w-4 h-4 text-white" />
                                     </div>
-                                    <span className="font-medium text-sm hidden sm:inline">
-                                          {t.cookieSettings}
-                                    </span>
-                                    <Settings className="w-4 h-4 transition-opacity" />
                               </motion.button>
                         )}
                   </AnimatePresence>

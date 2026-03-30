@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState, useMemo } from "react"
+// 1. เพิ่ม useTransition ตรงนี้ และลบ useRef ออก
+import { useEffect, useState, useMemo, useTransition } from "react"
 import Link from "next/link"
 import { useTranslations, useLocale } from "next-intl"
-import { useRouter, usePathname } from "@/i18n/routing"
+import { useRouter, usePathname, Link as IntlLink } from "@/i18n/routing"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -25,12 +26,13 @@ export default function Navbar() {
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
 
+  const [isPending, startTransition] = useTransition()
+
   const navItems = useMemo(() => {
     const links = t.raw('navbar.links') || []
     return links as Array<{ label: string; href: string }>
   }, [t])
 
-  // Language options
   const languages = [
     { code: "th" as const, name: "ไทย", flag: "🇹🇭" },
     { code: "en" as const, name: "English", flag: "🇺🇸" },
@@ -39,23 +41,14 @@ export default function Navbar() {
 
   const currentLang = languages.find((l) => l.code === locale) || languages[0]
 
-  const handleLanguageChange = (newLocale: "th" | "en" | "ja") => {
-    // เก็บ scroll position ปัจจุบัน
-    const currentScrollY = window.scrollY
-    sessionStorage.setItem('scrollPosition', currentScrollY.toString())
-
-    router.replace(pathname, { locale: newLocale })
+  // 3. ฟังก์ชันสำหรับเปลี่ยนภาษาโดยไม่ให้กระทบ Scroll
+  const switchLanguage = (newLocale: string) => {
     setIsLangOpen(false)
+    startTransition(() => {
+      // ใช้ replace เพื่อไม่ให้รก History และบังคับ scroll: false
+      router.replace(pathname, { locale: newLocale, scroll: false })
+    })
   }
-
-  // Restore scroll position หลังเปลี่ยนภาษา
-  useEffect(() => {
-    const savedScrollY = sessionStorage.getItem('scrollPosition')
-    if (savedScrollY) {
-      window.scrollTo(0, parseInt(savedScrollY, 10))
-      sessionStorage.removeItem('scrollPosition')
-    }
-  }, [locale])
 
   // Close dropdown on ESC key
   useEffect(() => {
@@ -129,11 +122,13 @@ export default function Navbar() {
           <div className="relative">
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
+              disabled={isPending} // ป้องกันการกดซ้ำตอนกำลังโหลด
               className={[
                 "cursor-pointer flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-200 group border-2",
                 scrolled
                   ? "bg-white border-gray-200 hover:border-[#439b83] text-gray-700"
                   : "bg-white/90 backdrop-blur-sm border-white/20 hover:border-[#439b83] text-gray-700",
+                isPending ? "opacity-70 cursor-wait" : ""
               ].join(" ")}
             >
               <Globe className="w-4 h-4 text-[#439b83]" />
@@ -142,22 +137,16 @@ export default function Navbar() {
                 {currentLang.name}
               </span>
               <svg
-                className={`w-4 h-4 text-gray-500 transition-transform ${isLangOpen ? "rotate-180" : ""
-                  }`}
+                className={`w-4 h-4 text-gray-500 transition-transform ${isLangOpen ? "rotate-180" : ""}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
-            {/* Language Dropdown */}
+            {/* Language Dropdown - Desktop */}
             <AnimatePresence>
               {isLangOpen && (
                 <>
@@ -169,9 +158,10 @@ export default function Navbar() {
                     transition={{ duration: 0.2 }}
                   >
                     {languages.map((language) => (
+                      // 4. เปลี่ยน IntlLink เป็น button เพื่อควบคุมด้วย startTransition
                       <button
                         key={language.code}
-                        onClick={() => handleLanguageChange(language.code)}
+                        onClick={() => switchLanguage(language.code)}
                         className={[
                           "cursor-pointer w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors",
                           locale === language.code
@@ -182,55 +172,36 @@ export default function Navbar() {
                         <span className="text-2xl">{language.flag}</span>
                         <span>{language.name}</span>
                         {locale === language.code && (
-                          <svg
-                            className="w-5 h-5 ml-auto text-[#439b83]"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
+                          <svg className="w-5 h-5 ml-auto text-[#439b83]" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         )}
                       </button>
                     ))}
                   </motion.div>
-
-                  {/* Overlay to close dropdown */}
-                  <div
-                    className="fixed inset-0 z-[999]"
-                    onClick={() => setIsLangOpen(false)}
-                  />
+                  <div className="fixed inset-0 z-[999]" onClick={() => setIsLangOpen(false)} />
                 </>
               )}
             </AnimatePresence>
           </div>
         </div>
+
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-2">
           {/* Language Selector - Mobile */}
           <div className="relative">
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-white border-2 border-gray-200 hover:border-[#439b83] rounded-xl transition-all duration-200"
+              disabled={isPending}
+              className={`cursor-pointer flex items-center gap-2 px-3 py-2 bg-white border-2 border-gray-200 hover:border-[#439b83] rounded-xl transition-all duration-200 ${isPending ? "opacity-70 cursor-wait" : ""}`}
             >
               <Globe className="w-4 h-4 text-[#439b83]" />
               <span className="font-medium text-gray-700">{currentLang.flag}</span>
               <svg
-                className={`w-4 h-4 text-gray-500 transition-transform ${isLangOpen ? "rotate-180" : ""
-                  }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+                className={`w-4 h-4 text-gray-500 transition-transform ${isLangOpen ? "rotate-180" : ""}`}
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
@@ -246,9 +217,10 @@ export default function Navbar() {
                     transition={{ duration: 0.2 }}
                   >
                     {languages.map((language) => (
+                      // 4. (เหมือนด้านบน) เปลี่ยน IntlLink เป็น button
                       <button
                         key={language.code}
-                        onClick={() => handleLanguageChange(language.code)}
+                        onClick={() => switchLanguage(language.code)}
                         className={[
                           "cursor-pointer w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors",
                           locale === language.code
@@ -259,55 +231,36 @@ export default function Navbar() {
                         <span className="text-2xl">{language.flag}</span>
                         <span>{language.name}</span>
                         {locale === language.code && (
-                          <svg
-                            className="w-5 h-5 ml-auto text-[#439b83]"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
+                          <svg className="w-5 h-5 ml-auto text-[#439b83]" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         )}
                       </button>
                     ))}
                   </motion.div>
-
-                  {/* Overlay to close dropdown */}
-                  <div
-                    className="fixed inset-0 z-[1099]"
-                    onClick={() => setIsLangOpen(false)}
-                  />
+                  <div className="fixed inset-0 z-[1099]" onClick={() => setIsLangOpen(false)} />
                 </>
               )}
             </AnimatePresence>
           </div>
 
-          {/* Hamburger */}
+          {/* Hamburger (เดิมไม่เปลี่ยนแปลง) */}
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <button
                 className={[
                   "p-2 rounded-md transition-colors",
-                  scrolled
-                    ? "text-gray-800 hover:bg-gray-100"
-                    : "text-white hover:bg-white/10",
+                  scrolled ? "text-gray-800 hover:bg-gray-100" : "text-white hover:bg-white/10",
                 ].join(" ")}
               >
                 <Menu className="w-6 h-6" />
               </button>
             </SheetTrigger>
 
-            <SheetContent
-              side="right"
-              className="top-0 h-screen w-72 bg-white p-6 shadow-xl z-[1200]"
-            >
+            <SheetContent side="right" className="top-0 h-screen w-72 bg-white p-6 shadow-xl z-[1200]">
               <SheetHeader>
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
-
               <div className="relative">
                 <Image
                   src="/Image/LOGO.png"
@@ -318,8 +271,7 @@ export default function Navbar() {
                   priority
                 />
               </div>
-
-              <nav className="flex flex-col space-y-2">
+              <nav className="flex flex-col space-y-2 mt-4">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (

@@ -94,24 +94,62 @@
       "title": "Development of Hydrogel Films for Wound Treatment",
       "description": "Medical innovation using Electrospinning technology to create thin films that can effectively assist in wound healing",
       "stats": [
-        { "label": "Efficacy", "value": "95%", "color": "emerald" },
-        { "label": "Safety", "value": "100%", "color": "blue" },
-        { "label": "Satisfaction", "value": "98%", "color": "purple" }
+        {
+          "label": "Efficacy",
+          "value": "95%",
+          "color": "emerald"
+        },
+        {
+          "label": "Safety",
+          "value": "100%",
+          "color": "blue"
+        },
+        {
+          "label": "Satisfaction",
+          "value": "98%",
+          "color": "purple"
+        }
       ]
     },
     "methodology": {
       "title": "Manufacturing and Testing Process",
       "description": "Using Electrospinning technique combined with Polyvinyl alcohol to create films with special properties",
       "methods": [
-        { "step": "01", "title": "Solution Preparation", "desc": "Mix PVA with additives for optimal properties" },
-        { "step": "02", "title": "Electrospinning Process", "desc": "Create nanofibers through electrical process" },
-        { "step": "03", "title": "Property Testing", "desc": "Test strength and biodegradation properties" },
-        { "step": "04", "title": "Performance Evaluation", "desc": "Real-world testing with various wound types" }
+        {
+          "step": "01",
+          "title": "Solution Preparation",
+          "desc": "Mix PVA with additives for optimal properties"
+        },
+        {
+          "step": "02",
+          "title": "Electrospinning Process",
+          "desc": "Create nanofibers through electrical process"
+        },
+        {
+          "step": "03",
+          "title": "Property Testing",
+          "desc": "Test strength and biodegradation properties"
+        },
+        {
+          "step": "04",
+          "title": "Performance Evaluation",
+          "desc": "Real-world testing with various wound types"
+        }
       ]
     }
   },
   "cta": {
     "text": "Interested in partnership or research?",
     "button": "Contact Us"
+  },
+  "badges": {
+    "patent": {
+      "label": "Patent Number",
+      "value": "2503000774"
+    },
+    "botanical": {
+      "label": "Botanical Extract",
+      "value": "Quercus infectoria"
+    }
   }
 }

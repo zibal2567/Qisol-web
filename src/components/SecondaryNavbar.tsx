@@ -74,7 +74,7 @@ export default function SecondaryNavbar() {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="hidden md:block fixed top-25 inset-x-0 z-[899] px-4 sm:px-6 lg:px-8"
         >
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-[420px] mx-auto">
             <motion.div
               initial={{ scale: 0.95 }}
               animate={{ scale: 1 }}
@@ -88,7 +88,7 @@ export default function SecondaryNavbar() {
                       key={section.id}
                       onClick={() => handleScrollTo(section.id)}
                       className={[
-                        "px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap text-sm font-medium",
+                        "cursor-pointer px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap text-sm font-medium",
                         isActive
                           ? "bg-[#439b83] text-white shadow-lg"
                           : "text-gray-700 hover:bg-white/40",

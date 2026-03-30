@@ -8,8 +8,10 @@ import { motion } from 'framer-motion';
 import { useSectionTracking } from '@/hooks/useScrollTracking';
 import { ImageZoom } from '@/components/ui/ImageZoom';
 
+let hasMountedBeforeHero = false;
+
 export default function HeroSection() {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(hasMountedBeforeHero);
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations('home.hero');
@@ -39,9 +41,10 @@ export default function HeroSection() {
 
   useEffect(() => {
     setMounted(true);
+    hasMountedBeforeHero = true;
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) return <div className="min-h-screen bg-[#439b83]" />; // Placeholder with height
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#439b83] via-[#367268] to-[#2d5e53]">
@@ -68,7 +71,7 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-20">
           {/* Text Content */}
           <div className="relative text-center lg:text-left">
             {/* Screen Reader Only H1 for SEO */}
@@ -111,7 +114,7 @@ export default function HeroSection() {
             </div>
 
             {/* รูปสินค้า */}
-            <div className="absolute sm:left-57 sm:-top-32 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-128 sm:h-128">
+            <div className="absolute sm:left-57 sm:-top-32 -top-25 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-128 sm:h-128">
               <ImageZoom>
                 <Image
                   alt="QI-SOL Product"
