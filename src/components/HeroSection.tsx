@@ -74,10 +74,15 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-20">
           {/* Text Content */}
           <div className="relative text-center lg:text-left">
+            {/* Screen Reader Only H1 for SEO */}
+            <h1 className="sr-only">
+              {t('title')} - {t('subtitle')}
+            </h1>
+
             <div className="absolute -top-6 sm:-top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-90">
               <Image
                 src="/Image/LOGO.png"
-                alt="QiSol"
+                alt={t('title')}
                 width={726}
                 height={204}
                 className="w-48 sm:w-72 lg:w-96 h-auto drop-shadow-lg"
@@ -85,10 +90,10 @@ export default function HeroSection() {
               />
             </div>
 
-            {/* Title */}
-            <h2 className="pt-10 text-xl sm:text-3xl lg:text-4xl font-bold text-white">
-              {t('title').split(" – ")[1]}
-            </h2>
+            {/* Spacer for layout (replaces the previously empty h2) */}
+            <div className="pt-10 text-xl sm:text-3xl lg:text-4xl font-bold" aria-hidden="true">
+              &nbsp;
+            </div>
 
             {/* Subtitle */}
             <p className="mt-2 text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto lg:mx-0">
